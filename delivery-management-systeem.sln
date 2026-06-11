@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "delivery-management-systeem", "delivery-management-systeem\delivery-management-systeem.csproj", "{81331631-5CE1-4731-B6D7-B4B000A86AEC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{81331631-5CE1-4731-B6D7-B4B000A86AEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81331631-5CE1-4731-B6D7-B4B000A86AEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81331631-5CE1-4731-B6D7-B4B000A86AEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81331631-5CE1-4731-B6D7-B4B000A86AEC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
