@@ -5,6 +5,14 @@
 
     <!-- Note: For Android please see also Platforms\Android\Resources\values\colors.xml -->
 
+    <!-- MATRIX COLORS -->
+    <Color x:Key="MatrixBlack">#000000</Color>
+    <Color x:Key="MatrixDark">#020A02</Color>
+    <Color x:Key="MatrixGreen">#00FF41</Color>
+    <Color x:Key="MatrixGreenSoft">#00CC33</Color>
+    <Color x:Key="MatrixText">#B6FFBF</Color>
+    <Color x:Key="MatrixRed">#FF0033</Color>
+
     <Color x:Key="Primary">#512BD4</Color>
     <Color x:Key="PrimaryDark">#ac99ea</Color>
     <Color x:Key="PrimaryDarkText">#242424</Color>

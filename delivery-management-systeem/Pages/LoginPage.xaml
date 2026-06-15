@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="delivery_management_systeem.Pages.LoginPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="#000000"
+    NavigationPage.HasNavigationBar="False">
+
+    <Grid Padding="30">
+
+        <VerticalStackLayout
+            VerticalOptions="Center"
+            HorizontalOptions="Center"
+            Spacing="30">
+
+            <Label
+                Text="DELIVERY MANAGEMENT SYSTEEM"
+                FontSize="28"
+                FontAttributes="Bold"
+                TextColor="#00FF41"
+                HorizontalTextAlignment="Center" />
+
+            <Label
+                Text="BEZORGER LOGIN"
+                FontSize="18"
+                TextColor="#00CC33"
+                HorizontalTextAlignment="Center" />
+
+            <Border
+                WidthRequest="320"
+                Padding="25"
+                BackgroundColor="#020A02"
+                Stroke="#00FF41"
+                StrokeThickness="2"
+                StrokeShape="RoundRectangle 20">
+
+                <VerticalStackLayout Spacing="20">
+
+                    <Label
+                        Text="📡"
+                        FontSize="80"
+                        HorizontalOptions="Center" />
+
+                    <Label
+                        Text="SCAN NFC"
+                        FontSize="24"
+                        FontAttributes="Bold"
+                        TextColor="#00FF41"
+                        HorizontalTextAlignment="Center" />
+
+                    <Label
+                        Text="Houd uw medewerkerskaart tegen het toestel"
+                        FontSize="14"
+                        TextColor="#B6FFBF"
+                        HorizontalTextAlignment="Center" />
+
+                    <Button
+                        Text="START NFC SCAN"
+                        HeightRequest="55"
+                        BackgroundColor="#020A02"
+                        BorderColor="#00FF41"
+                        BorderWidth="2"
+                        TextColor="#00FF41"
+                        CornerRadius="12"
+                        Clicked="OnNfcScanClicked" />
+
+                </VerticalStackLayout>
+
+            </Border>
+
+            <Button
+                Text="LOG IN MET GEGEVENS"
+                WidthRequest="320"
+                HeightRequest="55"
+                BackgroundColor="#020A02"
+                BorderColor="#00FF41"
+                BorderWidth="2"
+                TextColor="#00FF41"
+                CornerRadius="12"
+                Clicked="OnLoginWithCredentialsClicked" />
+            
+            <Button
+                Text="HELP"
+                WidthRequest="320"
+                HeightRequest="55"
+                BackgroundColor="#020A02"
+                BorderColor="#00FF41"
+                BorderWidth="2"
+                TextColor="#00FF41"
+                CornerRadius="12"
+                Clicked="OnHelpClicked" />
+
+        </VerticalStackLayout>
+
+    </Grid>
+
+</ContentPage>
