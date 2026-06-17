@@ -8,6 +8,15 @@
 
     <Grid Padding="30">
 
+        <Button
+        Text="scan"
+        WidthRequest="75"
+        HeightRequest="35"
+        BackgroundColor="Transparent"
+        HorizontalOptions="End"
+        VerticalOptions="Start"
+        Clicked="OnSettingsClicked"/>
+
         <VerticalStackLayout
             VerticalOptions="Center"
             HorizontalOptions="Center"

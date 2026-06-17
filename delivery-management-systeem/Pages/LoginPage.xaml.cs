@@ -9,7 +9,7 @@ public partial class LoginPage : ContentPage
 
     private async void OnNfcScanClicked(object sender, EventArgs e)
     {
-        await DisplayAlert("NFC", "NFC scan gestart", "OK");
+        await DisplayAlertAsync("NFC", "NFC scan gestart", "OK");
     }
 
     private async void OnLoginWithCredentialsClicked(object sender, EventArgs e)
@@ -21,6 +21,11 @@ public partial class LoginPage : ContentPage
     {
         await Navigation.PushAsync(new HelpPage());
     }
+    private async void OnSettingsClicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new ScaningPage());
+    }
+
 
 
 }
