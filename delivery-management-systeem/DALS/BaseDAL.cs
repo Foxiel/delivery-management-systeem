@@ -4,7 +4,7 @@ using System.Data;
 using System.Text;
 using Microsoft.Data.SqlClient;
 
-namespace delivery_management_systeem.Properties
+namespace delivery_management_systeem.DALS
 {
     public abstract class BaseDAL
     {
