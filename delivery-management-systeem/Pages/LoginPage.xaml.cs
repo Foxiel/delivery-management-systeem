@@ -21,11 +21,14 @@ public partial class LoginPage : ContentPage
     {
         await Navigation.PushAsync(new HelpPage());
     }
-    private async void OnSettingsClicked(object sender, EventArgs e)
+    
+    private async void OnScanClicked(object sender, EventArgs e)
     {
         await Navigation.PushAsync(new ScaningPage());
     }
-
-
-
+    
+    private async void OnDeliverClicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new DeliverPage());
+    }
 }
