@@ -8,17 +8,6 @@
 
     <Grid Padding="30" RowDefinitions="Auto,*">
 
-        <Button
-            Text="← TERUG"
-            WidthRequest="120"
-            HeightRequest="45"
-            BackgroundColor="#020A02"
-            BorderColor="#00FF41"
-            BorderWidth="1"
-            TextColor="#00FF41"
-            CornerRadius="10"
-            Clicked="OnBackClicked" />
-
         <VerticalStackLayout
             Grid.Row="1"
             VerticalOptions="Center"
@@ -67,8 +56,20 @@
 
                 </VerticalStackLayout>
             </Border>
-
+            
+            <Button
+                Text="← TERUG"
+                WidthRequest="120"
+                HeightRequest="45"
+                BackgroundColor="#020A02"
+                BorderColor="#00FF41"
+                BorderWidth="1"
+                TextColor="#00FF41"
+                CornerRadius="10"
+                Clicked="OnBackClicked" />
+            
         </VerticalStackLayout>
+        
 
     </Grid>
 </ContentPage>

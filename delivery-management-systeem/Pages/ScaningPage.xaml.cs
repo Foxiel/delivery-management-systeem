@@ -8,8 +8,10 @@ public partial class ScaningPage : ContentPage
 		InitializeComponent();
 		barcodeReaderView.Options = new ZXing.Net.Maui.BarcodeReaderOptions
 		{
-			Formats = ZXing.Net.Maui.BarcodeFormats.All,
-			AutoRotate = true,
+            //Formats = ZXing.Net.Maui.BarcodeFormats.All, //voor ale codes te kunnen scannen, maar dat is te traag
+            Formats = ZXing.Net.Maui.BarcodeFormat.Code128, // voor telefoons
+            //Formats = ZXing.Net.Maui.BarcodeFormat.QrCode, //voor tobias/laptob debugging
+            AutoRotate = false,
 			Multiple = true
 		};
 		
@@ -22,7 +24,7 @@ public partial class ScaningPage : ContentPage
 		{
 			Dispatcher.DispatchAsync(async () =>
 			{
-                await DisplayAlertAsync("Barcode detected", $"Type: {first.Format}\nValue: {first.Value} \nraw?: {first.Raw}", "OK");
+                await DisplayAlertAsync("Barcode detected", $"Type: {first.Format}\nValue: {first.Value}\n", "OK");
             });
 		}
     }
