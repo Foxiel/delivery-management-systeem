@@ -51,11 +51,13 @@ public partial class MapDeliveryPage : ContentPage
         KaartTabButton.BackgroundColor = Colors.Transparent;
         BezorgingTabButton.BackgroundColor = Color.FromArgb("#003D12");
     }
+    //=========================kaartpage==================================
 
     private async void RetourButton_Clicked(object sender, EventArgs e)
     {
-        // await Navigation.PushAsync(new RetourPage());
+        await Navigation.PushAsync(new RetourPage());
     }
+    //=========================deliverypage================================
 
     private void BarcodeReader_BarcodesDetected(object sender, ZXing.Net.Maui.BarcodeDetectionEventArgs e)
     {

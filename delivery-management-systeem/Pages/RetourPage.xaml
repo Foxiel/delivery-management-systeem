@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="delivery_management_systeem.Pages.RetourPage"
+             Title="RetourPage"
+             xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.MAUI.Controls">
+
+    <Grid RowDefinitions="300,Auto,Auto,200,Auto"
+          Padding="10"
+          BackgroundColor="#000"
+          RowSpacing="20">
+
+        <!-- Scanner vlak -->
+        <Border Grid.Row="0"
+                HeightRequest="300"
+                StrokeThickness="0"
+                Padding="0">
+
+            <Grid HeightRequest="300">
+
+                <zxing:CameraBarcodeReaderView
+                    x:Name="barcodeReaderView"
+                    BarcodesDetected="BarcodeReader_BarcodesDetected"
+                    HorizontalOptions="Fill"
+                    VerticalOptions="Fill" />
+
+                <Button
+                    Text="lamp"
+                    Clicked="ToggleLamp"
+                    WidthRequest="75"
+                    HeightRequest="50"
+                    BackgroundColor="#020A02"
+                    BorderColor="#00FF41"
+                    BorderWidth="2"
+                    TextColor="#00FF41"
+                    HorizontalOptions="End"
+                    VerticalOptions="End"
+                    Margin="0,0,10,10" />
+
+            </Grid>
+        </Border>
+
+        <!-- Handmatig barcode invoeren -->
+        <Grid Grid.Row="1"
+              RowDefinitions="Auto,Auto"
+              ColumnDefinitions="*,100"
+              ColumnSpacing="5">
+
+            <Label
+                Grid.Row="0"
+                Grid.ColumnSpan="2"
+                Text="Zelf barcode invullen"
+                TextColor="#00FF41"
+                HorizontalOptions="Start" />
+
+            <Border
+                Grid.Row="1"
+                Grid.Column="0"
+                Stroke="#00FF41"
+                StrokeThickness="2"
+                StrokeShape="RoundRectangle 12"
+                BackgroundColor="#020A02"
+                Padding="10,0"
+                HeightRequest="50">
+
+                <Entry
+                    x:Name="BarcodeEntry"
+                    Placeholder="Barcode"
+                    PlaceholderColor="#008F2A"
+                    TextColor="#00FF41"
+                    BackgroundColor="Transparent"
+                    VerticalOptions="Center" />
+
+            </Border>
+
+            <Button
+                Grid.Row="1"
+                Grid.Column="1"
+                Text="Submit"
+                Clicked="SubmitBarcode_Clicked"
+                HeightRequest="50"
+                BackgroundColor="#020A02"
+                BorderColor="#00FF41"
+                BorderWidth="2"
+                TextColor="#00FF41" />
+
+        </Grid>
+
+        <!-- Titel packetjeslijst -->
+        <Label Grid.Row="2"
+               Text="Retourlijst"
+               TextColor="#00FF41"
+               FontAttributes="Bold"
+               HorizontalOptions="Start" />
+
+        <!-- Productenlijst -->
+        <Border Grid.Row="3"
+                Stroke="#00FF41"
+                StrokeThickness="2"
+                StrokeShape="RoundRectangle 15"
+                BackgroundColor="#020A02">
+
+            <CollectionView
+                x:Name="ProductenCollectionView"
+                ItemsSource="{Binding RetourProducten}">
+
+                <CollectionView.Header>
+                    <Grid ColumnDefinitions="*,*,Auto"
+                          Padding="8"
+                          BackgroundColor="#001A08">
+
+                        <Label
+                            Text="EAN"
+                            TextColor="#00FF41"
+                            FontAttributes="Bold" />
+
+                        <Label
+                            Grid.Column="1"
+                            Text="Product"
+                            TextColor="#00FF41"
+                            FontAttributes="Bold" />
+
+                        <Label
+                            Grid.Column="2"
+                            Text="Hulp"
+                            TextColor="#00FF41"
+                            FontAttributes="Bold" />
+
+                    </Grid>
+                </CollectionView.Header>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid ColumnDefinitions="*,*,Auto"
+                              Padding="8">
+
+                            <Grid.Triggers>
+                                <DataTrigger
+                                    TargetType="Grid"
+                                    Binding="{Binding IsGescand}"
+                                    Value="True">
+
+                                    <Setter Property="BackgroundColor"
+                                            Value="#004400" />
+                                </DataTrigger>
+
+                                <DataTrigger
+                                    TargetType="Grid"
+                                    Binding="{Binding MistNaControle}"
+                                    Value="True">
+
+                                    <Setter Property="BackgroundColor"
+                                            Value="#550000" />
+                                </DataTrigger>
+                            </Grid.Triggers>
+
+                            <Label
+                                Text="{Binding EAN}"
+                                TextColor="#00FF41"
+                                LineBreakMode="WordWrap" />
+
+                            <Label
+                                Grid.Column="1"
+                                Text="{Binding Naam}"
+                                TextColor="#00FF41"
+                                LineBreakMode="WordWrap" />
+
+                            <Button
+                                Grid.Column="2"
+                                Text="?"
+                                Clicked="Help_Clicked"
+                                WidthRequest="40"
+                                HeightRequest="30"
+                                BackgroundColor="#020A02"
+                                BorderColor="#00FF41"
+                                CornerRadius="25"
+                                BorderWidth="2"
+                                TextColor="#00FF41" />
+
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+
+        </Border>
+
+        <!-- bevestigingknop -->
+        <Button Grid.Row="4"
+                Text="handtekening klant"
+                Clicked="HandtekeningButton_Clicked"
+                BackgroundColor="#020A02"
+                BorderColor="#00FF41"
+                BorderWidth="2"
+                TextColor="#00FF41"
+                HorizontalOptions="Center"
+                WidthRequest="180"
+                HeightRequest="50" />
+
+    </Grid>
+
+</ContentPage>
