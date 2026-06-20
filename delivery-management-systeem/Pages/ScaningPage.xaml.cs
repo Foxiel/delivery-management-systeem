@@ -46,6 +46,7 @@ public partial class ScaningPage : ContentPage
                 {
                     if (product.EAN == first.Value && product.IsGescand == false)
                     {
+                        product.MistNaControle = false;
                         product.IsGescand = true;
 
                         ProductenCollectionView.ItemsSource = null;
@@ -76,10 +77,12 @@ public partial class ScaningPage : ContentPage
         {
             if (product.EAN == barcode && product.IsGescand == false)
             {
+                product.MistNaControle = false;
                 product.IsGescand = true;
 
                 ProductenCollectionView.ItemsSource = null;
                 ProductenCollectionView.ItemsSource = Producten;
+
 
                 await DisplayAlertAsync(
                     "Product gevonden",
@@ -99,5 +102,36 @@ public partial class ScaningPage : ContentPage
     private void ToggleLamp(object sender, EventArgs e)
     {
         barcodeReaderView.IsTorchOn = !barcodeReaderView.IsTorchOn;
+    }
+    private async void Help_Clicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new HelpPage());
+    }
+    private async void StartButton_Clicked(object sender, EventArgs e)
+    {
+        bool allesGescand = true;
+
+        foreach (Product product in Producten)
+        {
+            if (!product.IsGescand)
+            {
+                product.MistNaControle = true;
+                allesGescand = false;
+
+                await DisplayAlertAsync(
+                    "Product niet gescand",
+                    $"Product: {product.Naam}\nEAN: {product.EAN} is nog niet gescand.",
+                    "OK");
+            }
+        }
+
+        ProductenCollectionView.ItemsSource = null;
+        ProductenCollectionView.ItemsSource = Producten;
+
+        if (allesGescand)
+        {
+            await Navigation.PushAsync(new MapDeliveryPage
+                ());
+        }
     }
 }

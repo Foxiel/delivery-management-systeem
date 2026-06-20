@@ -29,6 +29,6 @@ public partial class LoginPage : ContentPage
     
     private async void OnDeliverClicked(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new DeliverPage());
+        await Navigation.PushAsync(new MapDeliveryPage());
     }
 }

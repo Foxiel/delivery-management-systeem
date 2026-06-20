@@ -79,10 +79,16 @@
       <Compile Update="Pages\LoginWithCredentialsPage.xaml.cs">
         <DependentUpon>LoginWithCredentialsPage.xaml</DependentUpon>
       </Compile>
+      <Compile Update="Pages\MapDeliveryPage.xaml.cs">
+        <DependentUpon>MapDeliveryPage.xaml</DependentUpon>
+      </Compile>
     </ItemGroup>
 
     <ItemGroup>
       <MauiXaml Update="Pages\HelpPage.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </MauiXaml>
+      <MauiXaml Update="Pages\MapDeliveryPage.xaml">
         <Generator>MSBuild:Compile</Generator>
       </MauiXaml>
     </ItemGroup>

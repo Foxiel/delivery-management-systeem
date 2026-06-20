@@ -30,4 +30,5 @@ public class Product
     public string VoorraadStatus { get; set; } = string.Empty;
 
     public bool IsGescand { get; set; } = false;
+    public bool MistNaControle { get; set; } = false;
 }

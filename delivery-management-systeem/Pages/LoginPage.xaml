@@ -14,7 +14,7 @@
 
             <Button
                 Text="inscannen"
-                WidthRequest="90"
+                WidthRequest="120"
                 HeightRequest="35"
                 BackgroundColor="Transparent"
                 Clicked="OnScanClicked"/>

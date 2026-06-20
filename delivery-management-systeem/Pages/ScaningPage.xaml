@@ -5,148 +5,177 @@
              Title="ScaningPage"
              xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.MAUI.Controls">
 
-    <Grid RowDefinitions="300,Auto,200"
-      Padding="10"
-      BackgroundColor="#000"
-      RowSpacing="20">
+    <Grid RowDefinitions="300,Auto,Auto,200,Auto"
+          Padding="10"
+          BackgroundColor="#000"
+          RowSpacing="20">
 
         <!-- Scanner vlak -->
         <Border Grid.Row="0"
-            HeightRequest="300"
-            StrokeThickness="0"
-            Padding="0">
+                HeightRequest="300"
+                StrokeThickness="0"
+                Padding="0">
 
             <Grid HeightRequest="300">
 
                 <zxing:CameraBarcodeReaderView
-                x:Name="barcodeReaderView"
-                BarcodesDetected="BarcodeReader_BarcodesDetected"
-                HorizontalOptions="Fill"
-                VerticalOptions="Fill" />
+                    x:Name="barcodeReaderView"
+                    BarcodesDetected="BarcodeReader_BarcodesDetected"
+                    HorizontalOptions="Fill"
+                    VerticalOptions="Fill" />
 
                 <Button
-                Text="lamp"
-                Clicked="ToggleLamp"
-                WidthRequest="75"
-                HeightRequest="50"
-                BackgroundColor="#020A02"
-                BorderColor="#00FF41"
-                BorderWidth="2"
-                TextColor="#00FF41"
-                HorizontalOptions="End"
-                VerticalOptions="End"
-                Margin="0,0,10,10" />
+                    Text="lamp"
+                    Clicked="ToggleLamp"
+                    WidthRequest="75"
+                    HeightRequest="50"
+                    BackgroundColor="#020A02"
+                    BorderColor="#00FF41"
+                    BorderWidth="2"
+                    TextColor="#00FF41"
+                    HorizontalOptions="End"
+                    VerticalOptions="End"
+                    Margin="0,0,10,10" />
 
             </Grid>
         </Border>
 
         <!-- Handmatig barcode invoeren -->
         <Grid Grid.Row="1"
-          RowDefinitions="Auto,Auto"
-          ColumnDefinitions="*,100"
-          ColumnSpacing="5">
+              RowDefinitions="Auto,Auto"
+              ColumnDefinitions="*,100"
+              ColumnSpacing="5">
 
             <Label
-            Grid.Row="0"
-            Grid.ColumnSpan="2"
-            Text="Zelf barcode invullen"
-            TextColor="#00FF41"
-            HorizontalOptions="Start" />
+                Grid.Row="0"
+                Grid.ColumnSpan="2"
+                Text="Zelf barcode invullen"
+                TextColor="#00FF41"
+                HorizontalOptions="Start" />
 
             <Border
-            Grid.Row="1"
-            Grid.Column="0"
-            Stroke="#00FF41"
-            StrokeThickness="2"
-            StrokeShape="RoundRectangle 12"
-            BackgroundColor="#020A02"
-            Padding="10,0"
-            HeightRequest="50">
+                Grid.Row="1"
+                Grid.Column="0"
+                Stroke="#00FF41"
+                StrokeThickness="2"
+                StrokeShape="RoundRectangle 12"
+                BackgroundColor="#020A02"
+                Padding="10,0"
+                HeightRequest="50">
 
                 <Entry
-                x:Name="BarcodeEntry"
-                Placeholder="Barcode"
-                PlaceholderColor="#008F2A"
-                TextColor="#00FF41"
-                BackgroundColor="Transparent"
-                VerticalOptions="Center" />
+                    x:Name="BarcodeEntry"
+                    Placeholder="Barcode"
+                    PlaceholderColor="#008F2A"
+                    TextColor="#00FF41"
+                    BackgroundColor="Transparent"
+                    VerticalOptions="Center" />
 
             </Border>
 
             <Button
-            Grid.Row="1"
-            Grid.Column="1"
-            Text="Submit"
-            Clicked="SubmitBarcode_Clicked"
-            HeightRequest="50"
-            BackgroundColor="#020A02"
-            BorderColor="#00FF41"
-            BorderWidth="2"
-            TextColor="#00FF41" />
+                Grid.Row="1"
+                Grid.Column="1"
+                Text="Submit"
+                Clicked="SubmitBarcode_Clicked"
+                HeightRequest="50"
+                BackgroundColor="#020A02"
+                BorderColor="#00FF41"
+                BorderWidth="2"
+                TextColor="#00FF41" />
 
         </Grid>
 
+        <!-- Titel packetjeslijst -->
+        <Label Grid.Row="2"
+               Text="pakketjeslijst"
+               TextColor="#00FF41"
+               FontAttributes="Bold"
+               HorizontalOptions="Start" />
+
         <!-- Productenlijst -->
-        <Border Grid.Row="2"
-            Stroke="#00FF41"
-            StrokeThickness="2"
-            StrokeShape="RoundRectangle 15"
-            BackgroundColor="#020A02">
+        <Border Grid.Row="3"
+                Stroke="#00FF41"
+                StrokeThickness="2"
+                StrokeShape="RoundRectangle 15"
+                BackgroundColor="#020A02">
 
             <CollectionView
-            x:Name="ProductenCollectionView"
-            ItemsSource="{Binding Producten}">
+                x:Name="ProductenCollectionView"
+                ItemsSource="{Binding Producten}">
 
-                <!-- Header -->
                 <CollectionView.Header>
-                    <Grid ColumnDefinitions="*,*"
-                      Padding="8"
-                      BackgroundColor="#001A08">
+                    <Grid ColumnDefinitions="*,*,Auto"
+                          Padding="8"
+                          BackgroundColor="#001A08">
 
                         <Label
-                        Text="EAN"
-                        TextColor="#00FF41"
-                        FontAttributes="Bold" />
+                            Text="EAN"
+                            TextColor="#00FF41"
+                            FontAttributes="Bold" />
 
                         <Label
-                        Grid.Column="1"
-                        Text="Product"
-                        TextColor="#00FF41"
-                        FontAttributes="Bold" />
+                            Grid.Column="1"
+                            Text="Product"
+                            TextColor="#00FF41"
+                            FontAttributes="Bold" />
+
+                        <Label
+                            Grid.Column="2"
+                            Text="Hulp"
+                            TextColor="#00FF41"
+                            FontAttributes="Bold" />
 
                     </Grid>
                 </CollectionView.Header>
 
-                <!-- Productregels -->
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Grid ColumnDefinitions="*,*"
-                          Padding="8">
+                        <Grid ColumnDefinitions="*,*,Auto"
+                              Padding="8">
 
                             <Grid.Triggers>
-
                                 <DataTrigger
-                                TargetType="Grid"
-                                Binding="{Binding IsGescand}"
-                                Value="True">
+                                    TargetType="Grid"
+                                    Binding="{Binding IsGescand}"
+                                    Value="True">
 
                                     <Setter Property="BackgroundColor"
-                                        Value="#004400" />
-
+                                            Value="#004400" />
                                 </DataTrigger>
 
+                                <DataTrigger
+                                    TargetType="Grid"
+                                    Binding="{Binding MistNaControle}"
+                                    Value="True">
+
+                                    <Setter Property="BackgroundColor"
+                                            Value="#550000" />
+                                </DataTrigger>
                             </Grid.Triggers>
 
                             <Label
-                            Text="{Binding EAN}"
-                            TextColor="#00FF41"
-                            LineBreakMode="WordWrap" />
+                                Text="{Binding EAN}"
+                                TextColor="#00FF41"
+                                LineBreakMode="WordWrap" />
 
                             <Label
-                            Grid.Column="1"
-                            Text="{Binding Naam}"
-                            TextColor="#00FF41"
-                            LineBreakMode="WordWrap" />
+                                Grid.Column="1"
+                                Text="{Binding Naam}"
+                                TextColor="#00FF41"
+                                LineBreakMode="WordWrap" />
+
+                            <Button
+                                Grid.Column="2"
+                                Text="?"
+                                Clicked="Help_Clicked"
+                                WidthRequest="40"
+                                HeightRequest="30"
+                                BackgroundColor="#020A02"
+                                BorderColor="#00FF41"
+                                CornerRadius="25"
+                                BorderWidth="2"
+                                TextColor="#00FF41" />
 
                         </Grid>
                     </DataTemplate>
@@ -155,6 +184,18 @@
             </CollectionView>
 
         </Border>
+
+        <!-- Start knop -->
+        <Button Grid.Row="4"
+                Text="Start bestelling"
+                Clicked="StartButton_Clicked"
+                BackgroundColor="#020A02"
+                BorderColor="#00FF41"
+                BorderWidth="2"
+                TextColor="#00FF41"
+                HorizontalOptions="Center"
+                WidthRequest="180"
+                HeightRequest="50" />
 
     </Grid>
 
