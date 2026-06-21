@@ -92,6 +92,10 @@
       <MauiXaml Update="Pages\HelpPage.xaml">
         <Generator>MSBuild:Compile</Generator>
       </MauiXaml>
+      <MauiXaml Update="Pages\Ingelogd.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </MauiXaml>
+      <MauiXaml Update="Pages\SettingsPage.xaml">
       <MauiXaml Update="Pages\MapDeliveryPage.xaml">
         <Generator>MSBuild:Compile</Generator>
       </MauiXaml>

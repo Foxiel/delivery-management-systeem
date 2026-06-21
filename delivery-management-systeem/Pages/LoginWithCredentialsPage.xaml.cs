@@ -1,10 +1,13 @@
 namespace delivery_management_systeem.Pages;
-
+using System;
+using System.Threading.Tasks;
+using Microsoft.Maui.Controls;
 using delivery_management_systeem.Pages;
-
 
 public partial class LoginWithCredentialsPage : ContentPage
 {
+    private bool _isNavigating;
+
     public LoginWithCredentialsPage()
     {
         InitializeComponent();
@@ -21,16 +24,38 @@ public partial class LoginWithCredentialsPage : ContentPage
             return;
         }
 
-        await DisplayAlert("Login", "Inloggen gelukt.", "OK");
+        if (_isNavigating)
+            return;
 
-        // Later vervangen door je echte bezorger hoofdpagina
-        // await Navigation.PushAsync(new DeliveryHomePage());
+        _isNavigating = true;
+        try
+        {
+            // Try normal push navigation first; fall back to replacing MainPage when needed
+            if (this.Navigation != null)
+            {
+                await Navigation.PushAsync(new Ingelogd());
+                return;
+            }
+
+            if (Application.Current?.MainPage is NavigationPage nav)
+            {
+                await nav.PushAsync(new Ingelogd());
+                return;
+            }
+
+            Application.Current.MainPage = new NavigationPage(new Ingelogd());
+        }
+        finally
+        {
+            _isNavigating = false;
+        }
     }
 
     private async void OnBackClicked(object sender, EventArgs e)
     {
         await Navigation.PopAsync();
     }
+
     private async void OnHelpClicked(object sender, EventArgs e)
     {
         await Navigation.PushAsync(new HelpPage());
