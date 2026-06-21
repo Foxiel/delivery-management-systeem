@@ -7,15 +7,26 @@
     NavigationPage.HasNavigationBar="False">
 
     <Grid Padding="30">
+        <HorizontalStackLayout
+            HorizontalOptions="End"
+            VerticalOptions="Start"
+            Spacing="10">
 
-        <Button
-        Text="scan"
-        WidthRequest="75"
-        HeightRequest="35"
-        BackgroundColor="Transparent"
-        HorizontalOptions="End"
-        VerticalOptions="Start"
-        Clicked="OnSettingsClicked"/>
+            <Button
+                Text="inscannen"
+                WidthRequest="120"
+                HeightRequest="35"
+                BackgroundColor="Transparent"
+                Clicked="OnScanClicked"/>
+
+            <Button
+                Text="bezorgen"
+                WidthRequest="90"
+                HeightRequest="35"
+                BackgroundColor="Transparent"
+                Clicked="OnDeliverClicked"/>
+
+        </HorizontalStackLayout>
 
         <VerticalStackLayout
             VerticalOptions="Center"

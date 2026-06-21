@@ -66,6 +66,8 @@
     </ItemGroup>
 
     <ItemGroup>
+        <PackageReference Include="CommunityToolkit.Maui" Version="13.0.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.9" />
         <PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
         <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.0" />
         <PackageReference Include="ZXing.Net.Maui.Controls" Version="0.10.0" />
@@ -78,9 +80,15 @@
       <Compile Update="Pages\LoginWithCredentialsPage.xaml.cs">
         <DependentUpon>LoginWithCredentialsPage.xaml</DependentUpon>
       </Compile>
+      <Compile Update="Pages\MapDeliveryPage.xaml.cs">
+        <DependentUpon>MapDeliveryPage.xaml</DependentUpon>
+      </Compile>
     </ItemGroup>
 
     <ItemGroup>
+      <MauiXaml Update="Pages\HandtekeningPage.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </MauiXaml>
       <MauiXaml Update="Pages\HelpPage.xaml">
         <Generator>MSBuild:Compile</Generator>
       </MauiXaml>
@@ -88,6 +96,10 @@
         <Generator>MSBuild:Compile</Generator>
       </MauiXaml>
       <MauiXaml Update="Pages\SettingsPage.xaml">
+      <MauiXaml Update="Pages\MapDeliveryPage.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </MauiXaml>
+      <MauiXaml Update="Pages\RetourPage.xaml">
         <Generator>MSBuild:Compile</Generator>
       </MauiXaml>
     </ItemGroup>

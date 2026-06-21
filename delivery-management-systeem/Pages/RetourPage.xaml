@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="delivery_management_systeem.Pages.ScaningPage"
-             Title="ScaningPage"
+             x:Class="delivery_management_systeem.Pages.RetourPage"
+             Title="RetourPage"
              xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.MAUI.Controls">
 
     <Grid RowDefinitions="300,Auto,Auto,200,Auto"
@@ -88,7 +88,7 @@
 
         <!-- Titel packetjeslijst -->
         <Label Grid.Row="2"
-               Text="pakketjeslijst"
+               Text="Retourlijst"
                TextColor="#00FF41"
                FontAttributes="Bold"
                HorizontalOptions="Start" />
@@ -102,7 +102,7 @@
 
             <CollectionView
                 x:Name="ProductenCollectionView"
-                ItemsSource="{Binding Producten}">
+                ItemsSource="{Binding RetourProducten}">
 
                 <CollectionView.Header>
                     <Grid ColumnDefinitions="*,*,Auto"
@@ -185,10 +185,10 @@
 
         </Border>
 
-        <!-- Start knop -->
+        <!-- bevestigingknop -->
         <Button Grid.Row="4"
-                Text="Start bestelling"
-                Clicked="StartButton_Clicked"
+                Text="handtekening klant"
+                Clicked="HandtekeningButton_Clicked"
                 BackgroundColor="#020A02"
                 BorderColor="#00FF41"
                 BorderWidth="2"
