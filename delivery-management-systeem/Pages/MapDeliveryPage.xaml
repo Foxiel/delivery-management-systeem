@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
+
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="delivery_management_systeem.Pages.MapDeliveryPage"
@@ -79,7 +80,7 @@
                                HorizontalOptions="Center"
                                VerticalOptions="Start"
                                Margin="0,70,0,0" />
-                        
+
                     </Grid>
                 </Border>
 
@@ -150,25 +151,109 @@
             <!-- ==========================BEZORG PAGINA================================ -->
             <!-- ======================================================================= -->
             <Grid x:Name="BezorgGrid"
-                  Grid.Row="1"
-                  RowDefinitions="*,175"
-                  BackgroundColor="#000"
-                  IsVisible="False">
-
-                <Label Text="Hier komt nog een tabel"
-                       TextColor="#00FF41"
-                       FontSize="32"
-                       HorizontalOptions="Center"
-                       VerticalOptions="Start"
-                       Margin="0,30,0,0" />
-
-                <zxing:CameraBarcodeReaderView
                     Grid.Row="1"
-                    x:Name="deliverBarcodeReaderView"
-                    BarcodesDetected="BarcodeReader_BarcodesDetected"
-                    HeightRequest="175" />
+                    RowDefinitions="190,Auto,Auto,Auto"
+                    BackgroundColor="#000"
+                    IsVisible="False">
 
-            </Grid>
+                  <zxing:CameraBarcodeReaderView
+                      Grid.Row="0"
+                      x:Name="deliverBarcodeReaderView"
+                      BarcodesDetected="BarcodeReader_BarcodesDetected"
+                      HeightRequest="190"
+                      Margin="0,0,0,10" />
+
+                  <!-- Handmatige barcode invoer -->
+                  <Grid Grid.Row="1"
+                        ColumnDefinitions="*,Auto"
+                        Margin="0,0,0,10"
+                        ColumnSpacing="10">
+
+                      <Border Grid.Column="0"
+                              Stroke="#00FF41"
+                              StrokeThickness="2"
+                              StrokeShape="RoundRectangle 12"
+                              BackgroundColor="#020A02"
+                              Padding="0">
+
+                          <Entry x:Name="ManualBarcodeEntry"
+                                 Placeholder="Voer barcode in"
+                                 TextColor="#FFFFFF"
+                                 PlaceholderColor="#777"
+                                 BackgroundColor="Transparent"
+                                 Margin="12,10" />
+                      </Border>
+
+                      <Button Grid.Column="1"
+                              Text="+"
+                              WidthRequest="50"
+                              HeightRequest="50"
+                              CornerRadius="12"
+                              BackgroundColor="#003D12"
+                              TextColor="#00FF41"
+                              FontSize="24"
+                              FontAttributes="Bold"
+                              VerticalOptions="Center" />
+                  </Grid>
+
+                  <!-- Tabel -->
+                  <Border Grid.Row="2"
+                          Stroke="#00FF41"
+                          StrokeThickness="2"
+                          StrokeShape="RoundRectangle 12"
+                          BackgroundColor="#020A02"
+                          Margin="0,0,0,10"
+                          Padding="10">
+
+                      <Grid RowDefinitions="Auto,Auto,Auto,Auto"
+                            ColumnDefinitions="*,*"
+                            RowSpacing="8"
+                            ColumnSpacing="10">
+
+                          <Label Grid.Row="0" Grid.Column="0"
+                                 Text="Barcode"
+                                 TextColor="#00FF41"
+                                 FontAttributes="Bold" />
+                          <Label Grid.Row="0" Grid.Column="1"
+                                 Text="Zone"
+                                 TextColor="#00FF41"
+                                 FontAttributes="Bold" />
+
+                          <Label Grid.Row="1" Grid.Column="0"
+                                 Text="123456789"
+                                 TextColor="#FFFFFF" />
+                          <Label Grid.Row="1" Grid.Column="1"
+                                 Text="A1"
+                                 TextColor="#FFFFFF" />
+
+                          <Label Grid.Row="2" Grid.Column="0"
+                                 Text="987654321"
+                                 TextColor="#FFFFFF" />
+                          <Label Grid.Row="2" Grid.Column="1"
+                                 Text="B3"
+                                 TextColor="#FFFFFF" />
+
+                          <Label Grid.Row="3" Grid.Column="0"
+                                 Text="555666777"
+                                 TextColor="#FFFFFF" />
+                          <Label Grid.Row="3" Grid.Column="1"
+                                 Text="C2"
+                                 TextColor="#FFFFFF" />
+                      </Grid>
+                  </Border>
+
+                  <Button Grid.Row="3"
+                          Text="BEZORGING AFRONDEN"
+                          HeightRequest="55"
+                          BackgroundColor="#003D12"
+                          BorderColor="#00FF41"
+                          BorderWidth="2"
+                          TextColor="#00FF41"
+                          FontAttributes="Bold"
+                          HorizontalOptions="Fill"
+                          Margin="0,0,0,10" />
+
+              </Grid>
 
         </Grid>
 
