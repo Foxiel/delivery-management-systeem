@@ -6,7 +6,8 @@
     BackgroundColor="#000000"
     NavigationPage.HasNavigationBar="False">
 
-    <Grid Padding="30">
+     <Grid Padding="30">
+        <!-- 
         <HorizontalStackLayout
             HorizontalOptions="End"
             VerticalOptions="Start"
@@ -26,7 +27,8 @@
                 BackgroundColor="Transparent"
                 Clicked="OnDeliverClicked"/>
 
-        </HorizontalStackLayout>
+        </HorizontalStackLayout> -->
+         
 
         <VerticalStackLayout
             VerticalOptions="Center"

@@ -129,6 +129,6 @@ public partial class Ingelogd : ContentPage
 	private async void OnDoorgaanClicked(object sender, EventArgs e)
 	{
 		// Placeholder action for doorgaan button. Replace with actual navigation as needed.
-		await DisplayAlert("Doorgaan", "Je gaat door naar de volgende stap.", "OK");
+		await Navigation.PushAsync(new ScaningPage());
 	}
 }

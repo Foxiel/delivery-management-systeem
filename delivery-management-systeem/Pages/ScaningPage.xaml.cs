@@ -16,9 +16,9 @@ public partial class ScaningPage : ContentPage
 
         barcodeReaderView.Options = new ZXing.Net.Maui.BarcodeReaderOptions
         {
-            Formats = ZXing.Net.Maui.BarcodeFormats.All, //voor ale codes te kunnen scannen, maar dat is te traag
+            //Formats = ZXing.Net.Maui.BarcodeFormats.All, //voor ale codes te kunnen scannen, maar dat is te traag
             //Formats = ZXing.Net.Maui.BarcodeFormat.Code128, // voor telefoons
-            //Formats = ZXing.Net.Maui.BarcodeFormat.QrCode, //voor tobias/laptob debugging
+            Formats = ZXing.Net.Maui.BarcodeFormat.QrCode, //voor tobias/laptob debugging
             AutoRotate = false,
             Multiple = true
         };
