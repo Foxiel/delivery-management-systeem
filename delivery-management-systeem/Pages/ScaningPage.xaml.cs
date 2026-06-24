@@ -24,7 +24,7 @@ public partial class ScaningPage : ContentPage
         };
 
         // Bijvoorbeeld bestelling 1001 laden
-        ProductDAL productDAL = new ProductDAL();
+        ProductRepository productDAL = new ProductRepository();
 
         List<Product> producten = productDAL.GetProductInfoBestelling(0);
 

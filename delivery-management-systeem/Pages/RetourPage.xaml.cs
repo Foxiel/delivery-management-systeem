@@ -26,7 +26,7 @@ public partial class RetourPage : ContentPage
 
         
     }
-    ProductDAL productDAL = new ProductDAL();
+    ProductRepository productDAL = new ProductRepository();
     public ObservableCollection<Product> RetourProducten { get; set; } = new();
 
     private async void BarcodeReader_BarcodesDetected(object sender, ZXing.Net.Maui.BarcodeDetectionEventArgs e)

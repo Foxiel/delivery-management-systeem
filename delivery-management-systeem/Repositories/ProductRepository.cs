@@ -3,10 +3,11 @@ using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.EntityFrameworkCore;
 
 namespace delivery_management_systeem.DALS
 {
-    public class ProductDAL : BaseDAL
+    public class ProductRepository : dbContext
     {
         public List<Product> GetProductInfoBestelling(int bestellingId)
         {
