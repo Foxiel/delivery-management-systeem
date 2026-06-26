@@ -39,8 +39,8 @@ public partial class MapDeliveryPage : ContentPage
         KaartGrid.IsVisible = true;
         BezorgGrid.IsVisible = false;
 
-        KaartTabButton.BackgroundColor = Color.FromArgb("#003D12");
-        BezorgingTabButton.BackgroundColor = Colors.Transparent;
+        //KaartTabButton.BackgroundColor = Color.FromArgb("#003D12");
+        //BezorgingTabButton.BackgroundColor = Colors.Transparent;
     }
 
     private void ShowBezorging()
@@ -48,8 +48,8 @@ public partial class MapDeliveryPage : ContentPage
         KaartGrid.IsVisible = false;
         BezorgGrid.IsVisible = true;
 
-        KaartTabButton.BackgroundColor = Colors.Transparent;
-        BezorgingTabButton.BackgroundColor = Color.FromArgb("#003D12");
+        //KaartTabButton.BackgroundColor = Colors.Transparent;
+        //BezorgingTabButton.BackgroundColor = Color.FromArgb("#003D12");
     }
     //=========================kaartpage==================================
 
@@ -57,6 +57,7 @@ public partial class MapDeliveryPage : ContentPage
     {
         await Navigation.PushAsync(new RetourPage());
     }
+
     //=========================deliverypage================================
 
     private void BarcodeReader_BarcodesDetected(object sender, ZXing.Net.Maui.BarcodeDetectionEventArgs e)
@@ -66,7 +67,7 @@ public partial class MapDeliveryPage : ContentPage
         if (first != null)
         {
             Dispatcher.DispatchAsync(async () =>
-            {
+            { 
                 await DisplayAlertAsync(
                     "Barcode detected",
                     $"Type: {first.Format}\nValue: {first.Value}\nraw?: {first.Raw}",
@@ -78,5 +79,9 @@ public partial class MapDeliveryPage : ContentPage
     private void ToggleLamp(object sender, EventArgs e)
     {
         deliverBarcodeReaderView.IsTorchOn = !deliverBarcodeReaderView.IsTorchOn;
+    }
+    private async void Afronden_Clicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new HandtekeningPage());
     }
 }

@@ -5,18 +5,36 @@
              Title="ScaningPage"
              xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.MAUI.Controls">
 
-    <Grid RowDefinitions="300,Auto,Auto,200,Auto"
+    
+    <Grid RowDefinitions="auto,280,Auto,Auto,180,Auto"
           Padding="10"
           BackgroundColor="#000"
           RowSpacing="20">
 
+        <Grid>
+
+            <Label Grid.Row="0"
+                   Text="Scan de packetjes"
+                               TextColor="#00FF41"
+                               FontAttributes="Bold"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Start"
+                               FontSize="40"/>
+            
+        </Grid>
         <!-- Scanner vlak -->
-        <Border Grid.Row="0"
+        <Border Grid.Row="1"
                 HeightRequest="300"
-                StrokeThickness="0"
-                Padding="0">
+                Padding="0"
+                Stroke="#00FF41"
+                StrokeThickness="2"
+                StrokeShape="RoundRectangle 12"
+                BackgroundColor="#020A02">
+           
 
             <Grid HeightRequest="300">
+
+                
 
                 <zxing:CameraBarcodeReaderView
                     x:Name="barcodeReaderView"
@@ -41,7 +59,7 @@
         </Border>
 
         <!-- Handmatig barcode invoeren -->
-        <Grid Grid.Row="1"
+        <Grid Grid.Row="2"
               RowDefinitions="Auto,Auto"
               ColumnDefinitions="*,100"
               ColumnSpacing="5">
@@ -87,14 +105,14 @@
         </Grid>
 
         <!-- Titel packetjeslijst -->
-        <Label Grid.Row="2"
+        <Label Grid.Row="3"
                Text="pakketjeslijst"
                TextColor="#00FF41"
                FontAttributes="Bold"
                HorizontalOptions="Start" />
 
         <!-- Productenlijst -->
-        <Border Grid.Row="3"
+        <Border Grid.Row="4"
                 Stroke="#00FF41"
                 StrokeThickness="2"
                 StrokeShape="RoundRectangle 15"
@@ -186,8 +204,8 @@
         </Border>
 
         <!-- Start knop -->
-        <Button Grid.Row="4"
-                Text="Start bestelling"
+        <Button Grid.Row="5"
+                Text="Start bezorgen"
                 Clicked="StartButton_Clicked"
                 BackgroundColor="#020A02"
                 BorderColor="#00FF41"

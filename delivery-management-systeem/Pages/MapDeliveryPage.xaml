@@ -19,7 +19,7 @@
 
         <Grid RowDefinitions="Auto,*">
 
-            <!-- Kleine tab balk -->
+            <!-- Kleine tab balk 
             <Border Grid.Row="0"
                     Stroke="#00FF41"
                     StrokeThickness="2"
@@ -56,7 +56,7 @@
                             Padding="0" />
 
                 </Grid>
-            </Border>
+            </Border>-->
 
             <!-- ======================================================================= -->
             <!-- =============================Kaart pagina============================== -->
@@ -130,6 +130,20 @@
                         </VerticalStackLayout>
 
                         <Button Grid.Row="1"
+                                Grid.ColumnSpan="1"
+                                Text="BEZORGEN"
+                                Clicked="BezorgingButton_Clicked"
+                                WidthRequest="150"
+                                HeightRequest="50"
+                                BackgroundColor="#020A02"
+                                BorderColor="#00FF41"
+                                BorderWidth="2"
+                                TextColor="#00FF41"
+                                FontAttributes="Bold"
+                                HorizontalOptions="Start"
+                                Margin="0,15,0,0" />
+                        
+                        <Button Grid.Row="1"
                                 Grid.ColumnSpan="2"
                                 Text="RETOUR"
                                 Clicked="RetourButton_Clicked"
@@ -140,7 +154,7 @@
                                 BorderWidth="2"
                                 TextColor="#00FF41"
                                 FontAttributes="Bold"
-                                HorizontalOptions="Center"
+                                HorizontalOptions="End"
                                 Margin="0,15,0,0" />
 
                     </Grid>
@@ -152,24 +166,49 @@
             <!-- ======================================================================= -->
             <Grid x:Name="BezorgGrid"
                     Grid.Row="1"
-                    RowDefinitions="190,Auto,Auto,Auto"
+                    RowDefinitions="Auto,300,Auto,Auto,*,Auto"
                     BackgroundColor="#000"
+                    RowSpacing="12"
                     IsVisible="False">
 
-                  <zxing:CameraBarcodeReaderView
-                      Grid.Row="0"
-                      x:Name="deliverBarcodeReaderView"
-                      BarcodesDetected="BarcodeReader_BarcodesDetected"
-                      HeightRequest="190"
-                      Margin="0,0,0,10" />
+                <Label Grid.Row="0"
+                       Text="Scan de packetjes"
+                       TextColor="#00FF41"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Start"
+                       FontSize="30"/>
 
-                  <!-- Handmatige barcode invoer -->
-                  <Grid Grid.Row="1"
+                <Border Grid.Row="1"
+                    Stroke="#00FF41"
+                    StrokeThickness="2"
+                    StrokeShape="RoundRectangle 12"
+                    BackgroundColor="#020A02">
+
+                <zxing:CameraBarcodeReaderView
+                    x:Name="deliverBarcodeReaderView"
+                    BarcodesDetected="BarcodeReader_BarcodesDetected"
+                    HorizontalOptions="Fill"
+                    VerticalOptions="Fill" />
+
+                </Border>
+
+                <!-- Handmatige barcode invoer -->
+                  <Grid Grid.Row="2"
+                        RowDefinitions="auto,auto"
                         ColumnDefinitions="*,Auto"
                         Margin="0,0,0,10"
                         ColumnSpacing="10">
 
-                      <Border Grid.Column="0"
+                    <Label Grid.Row="0"
+                           Grid.ColumnSpan="2"
+                           Text="Zelf barcode invullen"
+                           TextColor="#00FF41"
+                           HorizontalOptions="Start" />
+
+
+                    <Border Grid.Column="0"
+                            Grid.Row="1"
                               Stroke="#00FF41"
                               StrokeThickness="2"
                               StrokeShape="RoundRectangle 12"
@@ -185,6 +224,7 @@
                       </Border>
 
                       <Button Grid.Column="1"
+                              Grid.Row="1"
                               Text="+"
                               WidthRequest="50"
                               HeightRequest="50"
@@ -196,8 +236,15 @@
                               VerticalOptions="Center" />
                   </Grid>
 
-                  <!-- Tabel -->
-                  <Border Grid.Row="2"
+                <!-- Scanner vlak -->
+                <Label Grid.Row="3"
+                       Text="pakketjeslijst"
+                       TextColor="#00FF41"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Start" />
+
+                <!-- Tabel -->
+                <Border Grid.Row="4"
                           Stroke="#00FF41"
                           StrokeThickness="2"
                           StrokeShape="RoundRectangle 12"
@@ -205,7 +252,7 @@
                           Margin="0,0,0,10"
                           Padding="10">
 
-                      <Grid RowDefinitions="Auto,Auto,Auto,Auto"
+                    <Grid RowDefinitions="Auto,Auto,Auto,Auto"
                             ColumnDefinitions="*,*"
                             RowSpacing="8"
                             ColumnSpacing="10">
@@ -242,8 +289,9 @@
                       </Grid>
                   </Border>
 
-                  <Button Grid.Row="3"
+                  <Button Grid.Row="5"
                           Text="BEZORGING AFRONDEN"
+                          Clicked="Afronden_Clicked"
                           HeightRequest="55"
                           BackgroundColor="#003D12"
                           BorderColor="#00FF41"
