@@ -73,13 +73,10 @@
                         BackgroundColor="#020A02">
 
                     <Grid>
-                        <Label Text="KAART"
-                               TextColor="#00FF41"
-                               FontSize="28"
-                               FontAttributes="Bold"
+                        <Image Source="route.png"
                                HorizontalOptions="Center"
-                               VerticalOptions="Start"
-                               Margin="0,70,0,0" />
+                               VerticalOptions="Center"
+                               Aspect="AspectFit" />
 
                     </Grid>
                 </Border>

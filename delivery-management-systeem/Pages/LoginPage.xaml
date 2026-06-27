@@ -12,6 +12,13 @@
             HorizontalOptions="End"
             VerticalOptions="Start"
             Spacing="10">
+            
+            <Label
+                Text="Voor het testen:"
+                FontSize="16"
+                TextColor="#00FF41"
+                VerticalTextAlignment="Center"
+                HorizontalTextAlignment="Center" />
 
             <Button
                 Text="inscannen"
