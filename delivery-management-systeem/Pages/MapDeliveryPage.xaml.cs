@@ -80,8 +80,14 @@ public partial class MapDeliveryPage : ContentPage
     {
         deliverBarcodeReaderView.IsTorchOn = !deliverBarcodeReaderView.IsTorchOn;
     }
+    
     private async void Afronden_Clicked(object sender, EventArgs e)
     {
         await Navigation.PushAsync(new HandtekeningPage());
+    }
+    
+    private async void Help_Clicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new HelpPage());
     }
 }
