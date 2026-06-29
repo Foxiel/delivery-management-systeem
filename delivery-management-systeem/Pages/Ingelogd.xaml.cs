@@ -120,15 +120,20 @@ public partial class Ingelogd : ContentPage
 		}
 	}
 
-	private void OnLogoutClicked(object sender, EventArgs e)
+	private async void OnLogoutClicked(object sender, EventArgs e)
 	{
-		// return to login page by replacing MainPage
-		Application.Current.MainPage = new NavigationPage(new LoginPage());
+		// WHAT: Navigate to service completion page instead of logout
+		// HOW: Push DienstBeëindigen page to navigation stack
+		// WHY: User can end their delivery route/shift from here
+		if (_menuOverlay != null)
+			_menuOverlay.IsVisible = false;
+
+		await Navigation.PushAsync(new LoginPage());
 	}
 
 	private async void OnDoorgaanClicked(object sender, EventArgs e)
 	{
 		// Placeholder action for doorgaan button. Replace with actual navigation as needed.
-		await Navigation.PushAsync(new ScaningPage());
+		await Navigation.PushAsync(new DienstBeëindigen());
 	}
 }
