@@ -2,6 +2,8 @@ namespace delivery_management_systeem.Pages;
 
 public partial class MapDeliveryPage : ContentPage
 {
+    private bool isfinished = false;
+    
     public MapDeliveryPage()
     {
         InitializeComponent();
@@ -13,6 +15,21 @@ public partial class MapDeliveryPage : ContentPage
             Multiple = true
         };
     }
+    
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+
+        // Als we terugkomen van de HandtekeningPage en isfinished is true, pas de knop aan
+        if (isfinished)
+        {
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                BezorgingButton.Text = "Afmelden";
+                ShowKaart();
+            });
+        }
+    }
 
     private void KaartButton_Clicked(object sender, EventArgs e)
     {
@@ -21,7 +38,14 @@ public partial class MapDeliveryPage : ContentPage
 
     private void BezorgingButton_Clicked(object sender, EventArgs e)
     {
-        ShowBezorging();
+        if (isfinished)
+        {
+            AfmeldProcedure();
+        }
+        else
+        {
+            ShowBezorging();
+        }
     }
 
     private void SwipeLeft_Swiped(object sender, SwipedEventArgs e)
@@ -83,11 +107,18 @@ public partial class MapDeliveryPage : ContentPage
     
     private async void Afronden_Clicked(object sender, EventArgs e)
     {
+        isfinished = true;
+        
         await Navigation.PushAsync(new HandtekeningPage());
     }
     
     private async void Help_Clicked(object sender, EventArgs e)
     {
         await Navigation.PushAsync(new HelpPage());
+    }
+
+    private async void AfmeldProcedure()
+    {
+        await Navigation.PushAsync(new DienstBeëindigen());
     }
 }

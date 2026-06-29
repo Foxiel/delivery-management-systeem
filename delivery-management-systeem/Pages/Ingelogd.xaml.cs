@@ -128,12 +128,12 @@ public partial class Ingelogd : ContentPage
 		if (_menuOverlay != null)
 			_menuOverlay.IsVisible = false;
 
-		await Navigation.PushAsync(new LoginPage());
+		await Navigation.PushAsync(new DienstBeëindigen());
 	}
 
 	private async void OnDoorgaanClicked(object sender, EventArgs e)
 	{
 		// Placeholder action for doorgaan button. Replace with actual navigation as needed.
-		await Navigation.PushAsync(new DienstBeëindigen());
+		await Navigation.PushAsync(new ScaningPage());
 	}
 }
