@@ -128,6 +128,7 @@
                         <Label
                             Grid.Column="1"
                             Text="Hulp"
+                            HorizontalOptions="End"
                             TextColor="#00FF41"
                             FontAttributes="Bold" />
 
