@@ -7,7 +7,7 @@ namespace delivery_management_systeem.Pages;
 
 public partial class RetourPage : ContentPage
 {
-    public ObservableCollection<Bezorging> Producten { get; set; } = new();
+    public ObservableCollection<Bezorging> bezorgingen { get; set; } = new();
 
     public RetourPage()
     {
@@ -27,7 +27,7 @@ public partial class RetourPage : ContentPage
 
     }
     BezorgingRepositorie bezorgDAL = new BezorgingRepositorie();
-    public ObservableCollection<Bezorging> RetourProducten { get; set; } = new();
+    public ObservableCollection<Bezorging> Retourbezorgingen { get; set; } = new();
 
     private async void BarcodeReader_BarcodesDetected(object sender, ZXing.Net.Maui.BarcodeDetectionEventArgs e)
     {
@@ -37,7 +37,7 @@ public partial class RetourPage : ContentPage
         {
             await Dispatcher.DispatchAsync(async () =>
             {
-                RetourProducten.Add(bezorgDAL.RetourBezorging(first.Value));
+                Retourbezorgingen.Add(bezorgDAL.RetourBezorging(first.Value));
             });
         }
     }
@@ -48,7 +48,7 @@ public partial class RetourPage : ContentPage
 
         if (barcode != null)
         {
-            RetourProducten.Add(bezorgDAL.RetourBezorging(barcode));
+            Retourbezorgingen.Add(bezorgDAL.RetourBezorging(barcode));
         }
     }
 

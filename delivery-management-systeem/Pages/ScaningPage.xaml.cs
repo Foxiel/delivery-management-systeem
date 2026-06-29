@@ -24,9 +24,9 @@ public partial class ScaningPage : ContentPage
         };
 
 
-        BezorgingRepositorie productDAL = new BezorgingRepositorie();
+        BezorgingRepositorie bezorgingDAL = new BezorgingRepositorie();
 
-        List<Bezorging> bezorgingen = productDAL.GetBezorgingInfoBestelling();
+        List<Bezorging> bezorgingen = bezorgingDAL.GetBezorgingInfoBestelling();
 
         foreach (Bezorging bezorging in bezorgingen)
         {
@@ -119,8 +119,8 @@ public partial class ScaningPage : ContentPage
                 allesGescand = false;
 
                 await DisplayAlertAsync(
-                    "Product niet gescand",
-                    $"Product: {bezorging.Code}\nEAN: {bezorging.Code} is nog niet gescand.",
+                    "bezorging niet gescand",
+                    $"bezorging: {bezorging.Code}\nEAN: {bezorging.Code} is nog niet gescand.",
                     "OK");
             }
         }
