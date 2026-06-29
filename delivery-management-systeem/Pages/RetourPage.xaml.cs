@@ -1,4 +1,4 @@
-using delivery_management_systeem.DALS;
+using delivery_management_systeem.Repositories;
 using delivery_management_systeem.Models;
 using System.Collections.ObjectModel;
 using ZXing.QrCode.Internal;
@@ -7,7 +7,7 @@ namespace delivery_management_systeem.Pages;
 
 public partial class RetourPage : ContentPage
 {
-    public ObservableCollection<Product> Producten { get; set; } = new();
+    public ObservableCollection<Bezorging> Producten { get; set; } = new();
 
     public RetourPage()
     {
@@ -22,12 +22,12 @@ public partial class RetourPage : ContentPage
             //Formats = ZXing.Net.Maui.BarcodeFormat.QrCode, //voor tobias/laptob debugging
             AutoRotate = false,
             Multiple = true
-        };    
+        };
 
-        
+
     }
-    ProductRepository productDAL = new ProductRepository();
-    public ObservableCollection<Product> RetourProducten { get; set; } = new();
+    BezorgingRepositorie bezorgDAL = new BezorgingRepositorie();
+    public ObservableCollection<Bezorging> RetourProducten { get; set; } = new();
 
     private async void BarcodeReader_BarcodesDetected(object sender, ZXing.Net.Maui.BarcodeDetectionEventArgs e)
     {
@@ -37,7 +37,7 @@ public partial class RetourPage : ContentPage
         {
             await Dispatcher.DispatchAsync(async () =>
             {
-                RetourProducten.Add(productDAL.productRetouren(first.Value));
+                RetourProducten.Add(bezorgDAL.RetourBezorging(first.Value));
             });
         }
     }
@@ -45,10 +45,10 @@ public partial class RetourPage : ContentPage
     private async void SubmitBarcode_Clicked(object sender, EventArgs e)
     {
         string barcode = BarcodeEntry.Text;
-        
-        if(barcode!= null)
+
+        if (barcode != null)
         {
-            RetourProducten.Add(productDAL.productRetouren(barcode));
+            RetourProducten.Add(bezorgDAL.RetourBezorging(barcode));
         }
     }
 

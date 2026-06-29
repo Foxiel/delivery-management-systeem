@@ -111,7 +111,7 @@
                FontAttributes="Bold"
                HorizontalOptions="Start" />
 
-        <!-- Productenlijst -->
+        <!-- packetjeslijst -->
         <Border Grid.Row="4"
                 Stroke="#00FF41"
                 StrokeThickness="2"
@@ -119,8 +119,8 @@
                 BackgroundColor="#020A02">
 
             <CollectionView
-                x:Name="ProductenCollectionView"
-                ItemsSource="{Binding Producten}">
+                x:Name="packetjesCollectionView"
+                ItemsSource="{Binding Bezorgingen}">
 
                 <CollectionView.Header>
                     <Grid ColumnDefinitions="*,*,Auto"
@@ -128,13 +128,13 @@
                           BackgroundColor="#001A08">
 
                         <Label
-                            Text="EAN"
+                            Text="packetje"
                             TextColor="#00FF41"
                             FontAttributes="Bold" />
 
                         <Label
                             Grid.Column="1"
-                            Text="Product"
+                            Text="locatie"
                             TextColor="#00FF41"
                             FontAttributes="Bold" />
 
@@ -173,13 +173,13 @@
                             </Grid.Triggers>
 
                             <Label
-                                Text="{Binding EAN}"
+                                Text="{Binding Code}"
                                 TextColor="#00FF41"
                                 LineBreakMode="WordWrap" />
 
                             <Label
                                 Grid.Column="1"
-                                Text="{Binding Naam}"
+                                Text="A"
                                 TextColor="#00FF41"
                                 LineBreakMode="WordWrap" />
 

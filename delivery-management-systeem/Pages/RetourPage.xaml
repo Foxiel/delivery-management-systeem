@@ -121,18 +121,12 @@
                           BackgroundColor="#001A08">
 
                         <Label
-                            Text="EAN"
+                            Text="Code"
                             TextColor="#00FF41"
                             FontAttributes="Bold" />
 
                         <Label
                             Grid.Column="1"
-                            Text="Product"
-                            TextColor="#00FF41"
-                            FontAttributes="Bold" />
-
-                        <Label
-                            Grid.Column="2"
                             Text="Hulp"
                             TextColor="#00FF41"
                             FontAttributes="Bold" />
@@ -166,13 +160,7 @@
                             </Grid.Triggers>
 
                             <Label
-                                Text="{Binding EAN}"
-                                TextColor="#00FF41"
-                                LineBreakMode="WordWrap" />
-
-                            <Label
-                                Grid.Column="1"
-                                Text="{Binding Naam}"
+                                Text="{Binding Code}"
                                 TextColor="#00FF41"
                                 LineBreakMode="WordWrap" />
 

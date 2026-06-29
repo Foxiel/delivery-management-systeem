@@ -1,4 +1,4 @@
-using delivery_management_systeem.DALS;
+using delivery_management_systeem.Repositories;
 using delivery_management_systeem.Models;
 using System.Collections.ObjectModel;
 
@@ -6,7 +6,7 @@ namespace delivery_management_systeem.Pages;
 
 public partial class ScaningPage : ContentPage
 {
-    public ObservableCollection<Product> Producten { get; set; } = new();
+    public ObservableCollection<Bezorging> Bezorgingen { get; set; } = new();
 
     public ScaningPage()
     {
@@ -23,14 +23,14 @@ public partial class ScaningPage : ContentPage
             Multiple = true
         };
 
-        // Bijvoorbeeld bestelling 1001 laden
-        ProductRepository productDAL = new ProductRepository();
 
-        List<Product> producten = productDAL.GetProductInfoBestelling(0);
+        BezorgingRepositorie productDAL = new BezorgingRepositorie();
 
-        foreach (Product product in producten)
+        List<Bezorging> bezorgingen = productDAL.GetBezorgingInfoBestelling();
+
+        foreach (Bezorging bezorging in bezorgingen)
         {
-            Producten.Add(product);
+            Bezorgingen.Add(bezorging);
         }
     }
 
@@ -42,19 +42,19 @@ public partial class ScaningPage : ContentPage
         {
             await Dispatcher.DispatchAsync(async () =>
             {
-                foreach (Product product in Producten)
+                foreach (Bezorging bezorging in Bezorgingen)
                 {
-                    if (product.EAN == first.Value && product.IsGescand == false)
+                    if (bezorging.Code == first.Value && bezorging.IsGescand == false)
                     {
-                        product.MistNaControle = false;
-                        product.IsGescand = true;
+                        bezorging.MistNaControle = false;
+                        bezorging.IsGescand = true;
 
-                        ProductenCollectionView.ItemsSource = null;
-                        ProductenCollectionView.ItemsSource = Producten;
+                        packetjesCollectionView.ItemsSource = null;
+                        packetjesCollectionView.ItemsSource = Bezorgingen;
 
                         await DisplayAlertAsync(
-                            "Product gevonden",
-                            $"Product: {product.Naam}\nEAN: {product.EAN}",
+                            "packetje gevonden",
+                            $"packetje: {bezorging.Code}",
                             "OK");
 
                         return;
@@ -62,8 +62,8 @@ public partial class ScaningPage : ContentPage
                 }
 
                 await DisplayAlertAsync(
-                    "Product niet gevonden",
-                    $"EAN: {first.Value} is niet gevonden in de bestelling.",
+                    "packetje niet gevonden",
+                    $"packetje: {first.Value} is niet gevonden in de bestelling.",
                     "OK");
             });
         }
@@ -73,20 +73,20 @@ public partial class ScaningPage : ContentPage
     {
         string barcode = BarcodeEntry.Text;
 
-        foreach (Product product in Producten)
+        foreach (Bezorging bezorging in Bezorgingen)
         {
-            if (product.EAN == barcode && product.IsGescand == false)
+            if (bezorging.Code == barcode && bezorging.IsGescand == false)
             {
-                product.MistNaControle = false;
-                product.IsGescand = true;
+                bezorging.MistNaControle = false;
+                bezorging.IsGescand = true;
 
-                ProductenCollectionView.ItemsSource = null;
-                ProductenCollectionView.ItemsSource = Producten;
+                packetjesCollectionView.ItemsSource = null;
+                packetjesCollectionView.ItemsSource = Bezorgingen;
 
 
                 await DisplayAlertAsync(
-                    "Product gevonden",
-                    $"Product: {product.Naam}\nEAN: {product.EAN}",
+                    "packetje gevonden",
+                    $"packetje: {bezorging.Code}",
                     "OK");
 
                 return;
@@ -94,7 +94,7 @@ public partial class ScaningPage : ContentPage
         }
 
         await DisplayAlertAsync(
-            "Product niet gevonden",
+            "packetje niet gevonden",
             $"EAN: {barcode} is niet gevonden in de bestelling.",
             "OK");
     }
@@ -111,22 +111,22 @@ public partial class ScaningPage : ContentPage
     {
         bool allesGescand = true;
 
-        foreach (Product product in Producten)
+        foreach (Bezorging bezorging in Bezorgingen)
         {
-            if (!product.IsGescand)
+            if (!bezorging.IsGescand)
             {
-                product.MistNaControle = true;
+                bezorging.MistNaControle = true;
                 allesGescand = false;
 
                 await DisplayAlertAsync(
                     "Product niet gescand",
-                    $"Product: {product.Naam}\nEAN: {product.EAN} is nog niet gescand.",
+                    $"Product: {bezorging.Code}\nEAN: {bezorging.Code} is nog niet gescand.",
                     "OK");
             }
         }
 
-        ProductenCollectionView.ItemsSource = null;
-        ProductenCollectionView.ItemsSource = Producten;
+        packetjesCollectionView.ItemsSource = null;
+        packetjesCollectionView.ItemsSource = Bezorgingen;
 
         if (allesGescand)
         {
