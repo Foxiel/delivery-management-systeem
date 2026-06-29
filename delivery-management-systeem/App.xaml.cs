@@ -11,6 +11,8 @@ public partial class App : Application
     {
         InitializeComponent();
 
+        // start altijd met NavigationPage
         MainPage = new NavigationPage(new LoginPage());
     }
 }
+
