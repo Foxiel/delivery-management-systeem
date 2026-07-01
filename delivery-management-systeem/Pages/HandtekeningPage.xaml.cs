@@ -34,7 +34,7 @@ public partial class HandtekeningPage : ContentPage
             "Opgeslagen",
             $"Handtekening opgeslagen",
             "OK");
-        await Navigation.PopAsync();
+        await Navigation.PushAsync(new MapDeliveryPage());
     }
 
     private async void OnClearClicked(object sender, EventArgs e)

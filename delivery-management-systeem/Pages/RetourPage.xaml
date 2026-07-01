@@ -6,7 +6,7 @@
              xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.MAUI.Controls">
 
     <Grid>
-        <Grid RowDefinitions="Auto,280,Auto,Auto,190,Auto"
+        <Grid RowDefinitions="Auto,270,Auto,Auto,180,Auto"
       Padding="10"
       BackgroundColor="#000"
       RowSpacing="20">
@@ -27,8 +27,9 @@
            TextColor="#00FF41"
            FontAttributes="Bold"
            HorizontalOptions="Center"
-           VerticalOptions="Start"
-           FontSize="35"/>
+           VerticalOptions="Center"
+           Padding="60,0,0,0"
+           FontSize="30"/>
 
             <!-- Scanner vlak -->
             <Border Grid.Row="1"

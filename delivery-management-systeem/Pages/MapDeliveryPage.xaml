@@ -85,8 +85,9 @@
                             Text="Route"
                             TextColor="#00FF41"
                             FontAttributes="Bold"
-                            HorizontalOptions="Center"
-                            VerticalOptions="Start"
+                            HorizontalOptions="Start"
+                            VerticalOptions="Center"
+                            Padding="60,0,0,0"
                             FontSize="40"/>
                             
                         
@@ -210,8 +211,9 @@
                  Text="Scan de packetjes"
                  TextColor="#00FF41"
                  FontAttributes="Bold"
-                 HorizontalOptions="Center"
-                 VerticalOptions="Start"
+                 HorizontalOptions="Start"
+                 VerticalOptions="Center"
+                 Padding="60,0,0,0"
                  FontSize="30"/>
 
                     <Border Grid.Row="1"
