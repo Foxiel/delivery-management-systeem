@@ -3,217 +3,273 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="delivery_management_systeem.Pages.ScaningPage"
              Title="ScaningPage"
+             BackgroundColor="#000000"
+             NavigationPage.HasNavigationBar="False"
              xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.MAUI.Controls">
 
-    
-    <Grid RowDefinitions="auto,280,Auto,Auto,180,Auto"
-          Padding="10"
-          BackgroundColor="#000"
-          RowSpacing="20">
+    <Grid BackgroundColor="#000000">
 
-        <Grid>
+        <!-- NORMALE CONTENT -->
+        <Grid RowDefinitions="Auto,280,Auto,Auto,180,Auto"
+              Padding="10"
+              BackgroundColor="#000000"
+              RowSpacing="20">
+
+            <Button x:Name="MenuButton"
+                    Grid.Row="0"
+                    Text="≡"
+                    FontSize="24"
+                    BackgroundColor="Transparent"
+                    TextColor="#00FF41"
+                    Clicked="OnMenuClicked"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Start"
+                    ZIndex="90" />
 
             <Label Grid.Row="0"
                    Text="Scan de packetjes"
-                               TextColor="#00FF41"
-                               FontAttributes="Bold"
-                               HorizontalOptions="Center"
-                               VerticalOptions="Start"
-                               FontSize="40"/>
-            
-        </Grid>
-        <!-- Scanner vlak -->
-        <Border Grid.Row="1"
-                HeightRequest="300"
-                Padding="0"
-                Stroke="#00FF41"
-                StrokeThickness="2"
-                StrokeShape="RoundRectangle 12"
-                BackgroundColor="#020A02">
-           
+                   TextColor="#00FF41"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Start"
+                   FontSize="40" />
 
-            <Grid HeightRequest="300">
+            <!-- Scanner vlak -->
+            <Border Grid.Row="1"
+                    HeightRequest="300"
+                    Padding="0"
+                    Stroke="#00FF41"
+                    StrokeThickness="2"
+                    StrokeShape="RoundRectangle 12"
+                    BackgroundColor="#020A02">
 
-                
+                <Grid HeightRequest="300">
 
-                <zxing:CameraBarcodeReaderView
-                    x:Name="barcodeReaderView"
-                    BarcodesDetected="BarcodeReader_BarcodesDetected"
-                    HorizontalOptions="Fill"
-                    VerticalOptions="Fill" />
+                    <zxing:CameraBarcodeReaderView
+                        x:Name="barcodeReaderView"
+                        BarcodesDetected="BarcodeReader_BarcodesDetected"
+                        HorizontalOptions="Fill"
+                        VerticalOptions="Fill" />
+
+                    <Button
+                        Text="lamp"
+                        Clicked="ToggleLamp"
+                        WidthRequest="75"
+                        HeightRequest="50"
+                        BackgroundColor="#020A02"
+                        BorderColor="#00FF41"
+                        BorderWidth="2"
+                        TextColor="#00FF41"
+                        HorizontalOptions="End"
+                        VerticalOptions="End"
+                        Margin="0,0,10,10" />
+
+                </Grid>
+            </Border>
+
+            <!-- Handmatig barcode invoeren -->
+            <Grid Grid.Row="2"
+                  RowDefinitions="Auto,Auto"
+                  ColumnDefinitions="*,100"
+                  ColumnSpacing="5">
+
+                <Label
+                    Grid.Row="0"
+                    Grid.ColumnSpan="2"
+                    Text="Zelf barcode invullen"
+                    TextColor="#00FF41"
+                    HorizontalOptions="Start" />
+
+                <Border
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Stroke="#00FF41"
+                    StrokeThickness="2"
+                    StrokeShape="RoundRectangle 12"
+                    BackgroundColor="#020A02"
+                    Padding="10,0"
+                    HeightRequest="50">
+
+                    <Entry
+                        x:Name="BarcodeEntry"
+                        Placeholder="Barcode"
+                        PlaceholderColor="#008F2A"
+                        TextColor="#00FF41"
+                        BackgroundColor="Transparent"
+                        VerticalOptions="Center" />
+
+                </Border>
 
                 <Button
-                    Text="lamp"
-                    Clicked="ToggleLamp"
-                    WidthRequest="75"
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Text="Submit"
+                    Clicked="SubmitBarcode_Clicked"
                     HeightRequest="50"
                     BackgroundColor="#020A02"
                     BorderColor="#00FF41"
                     BorderWidth="2"
-                    TextColor="#00FF41"
-                    HorizontalOptions="End"
-                    VerticalOptions="End"
-                    Margin="0,0,10,10" />
+                    TextColor="#00FF41" />
 
             </Grid>
-        </Border>
 
-        <!-- Handmatig barcode invoeren -->
-        <Grid Grid.Row="2"
-              RowDefinitions="Auto,Auto"
-              ColumnDefinitions="*,100"
-              ColumnSpacing="5">
+            <Label Grid.Row="3"
+                   Text="pakketjeslijst"
+                   TextColor="#00FF41"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Start" />
 
-            <Label
-                Grid.Row="0"
-                Grid.ColumnSpan="2"
-                Text="Zelf barcode invullen"
-                TextColor="#00FF41"
-                HorizontalOptions="Start" />
+            <!-- packetjeslijst -->
+            <Border Grid.Row="4"
+                    Stroke="#00FF41"
+                    StrokeThickness="2"
+                    StrokeShape="RoundRectangle 15"
+                    BackgroundColor="#020A02">
 
-            <Border
-                Grid.Row="1"
-                Grid.Column="0"
-                Stroke="#00FF41"
-                StrokeThickness="2"
-                StrokeShape="RoundRectangle 12"
-                BackgroundColor="#020A02"
-                Padding="10,0"
-                HeightRequest="50">
+                <CollectionView
+                    x:Name="packetjesCollectionView"
+                    ItemsSource="{Binding Bezorgingen}">
 
-                <Entry
-                    x:Name="BarcodeEntry"
-                    Placeholder="Barcode"
-                    PlaceholderColor="#008F2A"
-                    TextColor="#00FF41"
-                    BackgroundColor="Transparent"
-                    VerticalOptions="Center" />
-
-            </Border>
-
-            <Button
-                Grid.Row="1"
-                Grid.Column="1"
-                Text="Submit"
-                Clicked="SubmitBarcode_Clicked"
-                HeightRequest="50"
-                BackgroundColor="#020A02"
-                BorderColor="#00FF41"
-                BorderWidth="2"
-                TextColor="#00FF41" />
-
-        </Grid>
-
-        <!-- Titel packetjeslijst -->
-        <Label Grid.Row="3"
-               Text="pakketjeslijst"
-               TextColor="#00FF41"
-               FontAttributes="Bold"
-               HorizontalOptions="Start" />
-
-        <!-- packetjeslijst -->
-        <Border Grid.Row="4"
-                Stroke="#00FF41"
-                StrokeThickness="2"
-                StrokeShape="RoundRectangle 15"
-                BackgroundColor="#020A02">
-
-            <CollectionView
-                x:Name="packetjesCollectionView"
-                ItemsSource="{Binding Bezorgingen}">
-
-                <CollectionView.Header>
-                    <Grid ColumnDefinitions="*,*,Auto"
-                          Padding="8"
-                          BackgroundColor="#001A08">
-
-                        <Label
-                            Text="packetje"
-                            TextColor="#00FF41"
-                            FontAttributes="Bold" />
-
-                        <Label
-                            Grid.Column="1"
-                            Text="locatie"
-                            TextColor="#00FF41"
-                            FontAttributes="Bold" />
-
-                        <Label
-                            Grid.Column="2"
-                            Text="Hulp"
-                            TextColor="#00FF41"
-                            FontAttributes="Bold" />
-
-                    </Grid>
-                </CollectionView.Header>
-
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
+                    <CollectionView.Header>
                         <Grid ColumnDefinitions="*,*,Auto"
-                              Padding="8">
-
-                            <Grid.Triggers>
-                                <DataTrigger
-                                    TargetType="Grid"
-                                    Binding="{Binding IsGescand}"
-                                    Value="True">
-
-                                    <Setter Property="BackgroundColor"
-                                            Value="#004400" />
-                                </DataTrigger>
-
-                                <DataTrigger
-                                    TargetType="Grid"
-                                    Binding="{Binding MistNaControle}"
-                                    Value="True">
-
-                                    <Setter Property="BackgroundColor"
-                                            Value="#550000" />
-                                </DataTrigger>
-                            </Grid.Triggers>
+                              Padding="8"
+                              BackgroundColor="#001A08">
 
                             <Label
-                                Text="{Binding Code}"
+                                Text="packetje"
                                 TextColor="#00FF41"
-                                LineBreakMode="WordWrap" />
+                                FontAttributes="Bold" />
 
                             <Label
                                 Grid.Column="1"
-                                Text="A"
+                                Text="locatie"
                                 TextColor="#00FF41"
-                                LineBreakMode="WordWrap" />
+                                FontAttributes="Bold" />
 
-                            <Button
+                            <Label
                                 Grid.Column="2"
-                                Text="?"
-                                Clicked="Help_Clicked"
-                                WidthRequest="40"
-                                HeightRequest="30"
-                                BackgroundColor="#020A02"
-                                BorderColor="#00FF41"
-                                CornerRadius="25"
-                                BorderWidth="2"
-                                TextColor="#00FF41" />
+                                Text="Hulp"
+                                TextColor="#00FF41"
+                                FontAttributes="Bold" />
 
                         </Grid>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
+                    </CollectionView.Header>
 
-            </CollectionView>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid ColumnDefinitions="*,*,Auto"
+                                  Padding="8">
 
-        </Border>
+                                <Grid.Triggers>
+                                    <DataTrigger
+                                        TargetType="Grid"
+                                        Binding="{Binding IsGescand}"
+                                        Value="True">
+                                        <Setter Property="BackgroundColor"
+                                                Value="#004400" />
+                                    </DataTrigger>
 
-        <!-- Start knop -->
-        <Button Grid.Row="5"
-                Text="Start bezorgen"
-                Clicked="StartButton_Clicked"
-                BackgroundColor="#020A02"
-                BorderColor="#00FF41"
-                BorderWidth="2"
-                TextColor="#00FF41"
-                HorizontalOptions="Center"
-                WidthRequest="180"
-                HeightRequest="50" />
+                                    <DataTrigger
+                                        TargetType="Grid"
+                                        Binding="{Binding MistNaControle}"
+                                        Value="True">
+                                        <Setter Property="BackgroundColor"
+                                                Value="#550000" />
+                                    </DataTrigger>
+                                </Grid.Triggers>
+
+                                <Label
+                                    Text="{Binding Code}"
+                                    TextColor="#00FF41"
+                                    LineBreakMode="WordWrap" />
+
+                                <Label
+                                    Grid.Column="1"
+                                    Text="A"
+                                    TextColor="#00FF41"
+                                    LineBreakMode="WordWrap" />
+
+                                <Button
+                                    Grid.Column="2"
+                                    Text="?"
+                                    Clicked="Help_Clicked"
+                                    WidthRequest="40"
+                                    HeightRequest="30"
+                                    BackgroundColor="#020A02"
+                                    BorderColor="#00FF41"
+                                    CornerRadius="25"
+                                    BorderWidth="2"
+                                    TextColor="#00FF41" />
+
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+
+                </CollectionView>
+
+            </Border>
+
+            <Button Grid.Row="5"
+                    Text="Start bezorgen"
+                    Clicked="StartButton_Clicked"
+                    BackgroundColor="#020A02"
+                    BorderColor="#00FF41"
+                    BorderWidth="2"
+                    TextColor="#00FF41"
+                    HorizontalOptions="Center"
+                    WidthRequest="180"
+                    HeightRequest="50" />
+
+        </Grid>
+
+        <!-- OVERLAY MENU -->
+        <Grid x:Name="MenuOverlay"
+              IsVisible="False"
+              BackgroundColor="#80000000"
+              ZIndex="100">
+
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OnOverlayTapped" />
+            </Grid.GestureRecognizers>
+
+            <Frame x:Name="MenuPanel"
+                   BackgroundColor="#020A02"
+                   BorderColor="#00FF41"
+                   Padding="8"
+                   HasShadow="True"
+                   VerticalOptions="Start"
+                   HorizontalOptions="Start"
+                   Margin="10"
+                   CornerRadius="8"
+                   WidthRequest="280"
+                   ZIndex="101">
+
+                <VerticalStackLayout Spacing="12">
+
+                    <Button Text="Help"
+                            BackgroundColor="Transparent"
+                            TextColor="#00FF41"
+                            Clicked="OnHelpClickedFromMenu" />
+
+                    <Button x:Name="PauzeButton"
+                            Text="Pauze"
+                            BackgroundColor="Transparent"
+                            TextColor="#00FF41"
+                            Clicked="OnPauseClickedFromMenu" />
+
+                    <Button Text="Settings"
+                            BackgroundColor="Transparent"
+                            TextColor="#00FF41"
+                            Clicked="OnSettingsClickedFromMenu" />
+
+                    <Button Text="Afmelden"
+                            BackgroundColor="Transparent"
+                            TextColor="#FF4444"
+                            Clicked="OnLogoutClicked" />
+
+                </VerticalStackLayout>
+            </Frame>
+        </Grid>
 
     </Grid>
 

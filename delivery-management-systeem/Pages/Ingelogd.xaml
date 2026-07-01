@@ -3,13 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="delivery_management_systeem.Pages.Ingelogd"
              BackgroundColor="#000000"
-             Title="Ingelogd">
-    <Grid>
+             NavigationPage.HasNavigationBar="False">
 
-        <!-- Main content -->
+    <Grid BackgroundColor="#000000">
+
+        <!-- CONTENT -->
         <VerticalStackLayout Spacing="0" Padding="12">
 
-            <!-- Top bar with menu (left) and help (right) -->
             <Grid ColumnDefinitions="Auto,*,Auto" VerticalOptions="Start" Margin="0,6">
                 <Button x:Name="MenuButton"
                         Text="≡"
@@ -18,12 +18,8 @@
                         TextColor="#00FF41"
                         Clicked="OnMenuClicked"
                         HorizontalOptions="Start" />
-
-                <!-- spacer in center -->
-                <Label Grid.Column="1" />
             </Grid>
 
-            <!-- Title under the top bar -->
             <Label Text="Welkom bezorger"
                    FontSize="36"
                    FontAttributes="Bold"
@@ -31,40 +27,45 @@
                    HorizontalOptions="Center"
                    Margin="0,8" />
 
-            <!-- Schedule table -->
-            <Frame BackgroundColor="#020A02" BorderColor="#00FF41" CornerRadius="12" Padding="12" Margin="0,8">
-                <Grid ColumnDefinitions="60,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto">
-                    <Label Grid.Row="0" Grid.Column="0" Text="ma" TextColor="#00FF41" VerticalOptions="Center" />
+            <Frame BackgroundColor="#020A02"
+                   BorderColor="#00FF41"
+                   CornerRadius="12"
+                   Padding="12"
+                   Margin="0,8">
+
+                <Grid ColumnDefinitions="60,*"
+                      RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto">
+
+                    <Label Grid.Row="0" Grid.Column="0" Text="ma" TextColor="#00FF41" />
                     <Label Grid.Row="0" Grid.Column="1" Text="13:00 / 20:00" TextColor="#B6FFBF" />
 
-                    <Label Grid.Row="1" Grid.Column="0" Text="di" TextColor="#00FF41" VerticalOptions="Center" />
+                    <Label Grid.Row="1" Grid.Column="0" Text="di" TextColor="#00FF41" />
                     <Label Grid.Row="1" Grid.Column="1" Text="15:00 / 21:00" TextColor="#B6FFBF" />
 
-					<BoxView Grid.Row="2" Grid.ColumnSpan="2" HeightRequest="1" Color="#003300" Margin="0,8" />
+                    <BoxView Grid.Row="2" Grid.ColumnSpan="2" HeightRequest="1" Color="#003300" Margin="0,8" />
 
-                    <Label Grid.Row="3" Grid.Column="0" Text="wo" TextColor="#00FF41" VerticalOptions="Center" />
+                    <Label Grid.Row="3" Grid.Column="0" Text="wo" TextColor="#00FF41" />
                     <Label Grid.Row="3" Grid.Column="1" Text="-" TextColor="#B6FFBF" />
 
-					<BoxView Grid.Row="4" Grid.ColumnSpan="2" HeightRequest="1" Color="#003300" Margin="0,8" />
+                    <BoxView Grid.Row="4" Grid.ColumnSpan="2" HeightRequest="1" Color="#003300" Margin="0,8" />
 
-					<Label Grid.Row="5" Grid.Column="0" Text="do" TextColor="#00FF41" VerticalOptions="Center" />
-					<Label Grid.Row="5" Grid.Column="1" Text="15:00 / 21:00" TextColor="#B6FFBF" />
+                    <Label Grid.Row="5" Grid.Column="0" Text="do" TextColor="#00FF41" />
+                    <Label Grid.Row="5" Grid.Column="1" Text="15:00 / 21:00" TextColor="#B6FFBF" />
 
-					<Label Grid.Row="6" Grid.Column="0" Text="fr" TextColor="#00FF41" VerticalOptions="Center" />
-					<Label Grid.Row="6" Grid.Column="1" Text="13:00 / 18:00" TextColor="#B6FFBF" />
+                    <Label Grid.Row="6" Grid.Column="0" Text="fr" TextColor="#00FF41" />
+                    <Label Grid.Row="6" Grid.Column="1" Text="13:00 / 18:00" TextColor="#B6FFBF" />
 
-					<BoxView Grid.Row="7" Grid.ColumnSpan="2" HeightRequest="1" Color="#003300" Margin="0,8" />
+                    <BoxView Grid.Row="7" Grid.ColumnSpan="2" HeightRequest="1" Color="#003300" Margin="0,8" />
 
-					<Label Grid.Row="8" Grid.Column="0" Text="sa" TextColor="#00FF41" VerticalOptions="Center" />
-					<Label Grid.Row="8" Grid.Column="1" Text="-" TextColor="#B6FFBF" />
+                    <Label Grid.Row="8" Grid.Column="0" Text="sa" TextColor="#00FF41" />
+                    <Label Grid.Row="8" Grid.Column="1" Text="-" TextColor="#B6FFBF" />
 
-					<Label Grid.Row="9" Grid.Column="0" Text="su" TextColor="#00FF41" VerticalOptions="Center" />
-					<Label Grid.Row="9" Grid.Column="1" Text="-" TextColor="#B6FFBF" />
-					
+                    <Label Grid.Row="9" Grid.Column="0" Text="su" TextColor="#00FF41" />
+                    <Label Grid.Row="9" Grid.Column="1" Text="-" TextColor="#B6FFBF" />
+
                 </Grid>
             </Frame>
 
-            <!-- Parking and license info -->
             <VerticalStackLayout Spacing="6" Margin="0,8">
                 <Label Text="Parkeerplek:" TextColor="#00FF41" FontAttributes="Bold" />
                 <Label x:Name="ParkeerplekLabel" Text="C1" TextColor="#B6FFBF" FontSize="18" />
@@ -73,10 +74,8 @@
                 <Label x:Name="KentekenLabel" Text="V-123-KL" TextColor="#B6FFBF" FontSize="18" />
             </VerticalStackLayout>
 
-            <!-- Spacer -->
             <BoxView HeightRequest="20" Color="Transparent" />
 
-            <!-- Continue button -->
             <Button Text="DOORGAAN"
                     BackgroundColor="#00FF41"
                     TextColor="#000000"
@@ -86,26 +85,51 @@
 
         </VerticalStackLayout>
 
-        <!-- Overlay menu (hidden by default) -->
-        <Grid x:Name="MenuOverlay" IsVisible="False">
-            <!-- dim background fills the whole overlay and closes menu when tapped -->
-            <BoxView x:Name="OverlayBackground"
-                     Color="#80000000"
-                     VerticalOptions="FillAndExpand"
-                     HorizontalOptions="FillAndExpand">
-                <BoxView.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="OnOverlayTapped" NumberOfTapsRequired="1" />
-                </BoxView.GestureRecognizers>
-            </BoxView>
+        <!-- OVERLAY MENU -->
+        <Grid x:Name="MenuOverlay"
+              IsVisible="False"
+              BackgroundColor="#80000000"
+              ZIndex="100">
 
-            <!-- menu panel on the left -->
-            <Frame x:Name="MenuPanel" BackgroundColor="#020A02" BorderColor="#00FF41" Padding="8" HasShadow="True"
-                   VerticalOptions="Start" HorizontalOptions="Start" Margin="10" CornerRadius="8" WidthRequest="280">
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OnOverlayTapped" />
+            </Grid.GestureRecognizers>
+
+            <Frame x:Name="MenuPanel"
+                   BackgroundColor="#020A02"
+                   BorderColor="#00FF41"
+                   Padding="8"
+                   HasShadow="True"
+                   VerticalOptions="Start"
+                   HorizontalOptions="Start"
+                   Margin="10"
+                   CornerRadius="8"
+                   WidthRequest="280"
+                   ZIndex="101">
+
                 <VerticalStackLayout Spacing="12">
-                    <Button Text="Help" BackgroundColor="Transparent" TextColor="#00FF41" Clicked="OnHelpClickedFromMenu" />
-                    <Button x:Name="PauzeButton" Text="Pauze" BackgroundColor="Transparent" TextColor="#00FF41" Clicked="OnPauseClickedFromMenu" />
-                    <Button Text="Settings" BackgroundColor="Transparent" TextColor="#00FF41" Clicked="OnSettingsClickedFromMenu" />
-                    <Button Text="Afmelden" BackgroundColor="Transparent" TextColor="#FF4444" Clicked="OnLogoutClicked" />
+
+                    <Button Text="Help"
+                            BackgroundColor="Transparent"
+                            TextColor="#00FF41"
+                            Clicked="OnHelpClickedFromMenu" />
+
+                    <Button x:Name="PauzeButton"
+                            Text="Pauze"
+                            BackgroundColor="Transparent"
+                            TextColor="#00FF41"
+                            Clicked="OnPauseClickedFromMenu" />
+
+                    <Button Text="Settings"
+                            BackgroundColor="Transparent"
+                            TextColor="#00FF41"
+                            Clicked="OnSettingsClickedFromMenu" />
+
+                    <Button Text="Afmelden"
+                            BackgroundColor="Transparent"
+                            TextColor="#FF4444"
+                            Clicked="OnLogoutClicked" />
+
                 </VerticalStackLayout>
             </Frame>
         </Grid>
