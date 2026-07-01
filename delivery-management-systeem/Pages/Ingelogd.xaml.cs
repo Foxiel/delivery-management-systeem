@@ -69,14 +69,20 @@ public partial class Ingelogd : ContentPage
 			_menuOverlay.IsVisible = false;
 	}
 
-	private async void OnHelpClickedFromMenu(object sender, EventArgs e)
+	private async void OnHelpClicked(object sender, EventArgs e)
 	{
-		if (_menuOverlay != null)
-			_menuOverlay.IsVisible = false;
-		await Navigation.PushAsync(new HelpPage());
+		// navigate to HelpPage if available, otherwise show a message
+		try
+		{
+			await Navigation.PushAsync(new HelpPage());
+		}
+		catch
+		{
+			await DisplayAlert("Help", "Helppagina niet beschikbaar.", "OK");
+		}
 	}
 
-	private async void OnPauzeClickedFromMenu(object sender, EventArgs e)
+	private async void OnPauseClickedFromMenu(object sender, EventArgs e)
 	{
 		// toggle pause state
 		_isPaused = !_isPaused;
@@ -91,12 +97,19 @@ public partial class Ingelogd : ContentPage
 		await DisplayAlert("Pauze", _isPaused ? "Pauze gestart" : "Pauze gestopt", "OK");
 	}
 
+    private async void OnHelpClickedFromMenu(object sender, EventArgs e)
+	{
+		if (_menuOverlay != null)
+			_menuOverlay.IsVisible = false;
+		await Navigation.PushAsync(new HelpPage());
+	}
+
 	private async void OnSettingsClickedFromMenu(object sender, EventArgs e)
 	{
 		if (_menuOverlay != null)
 			_menuOverlay.IsVisible = false;
 
-		// navigate to a dedicated Settings page
+		// navigate to a dedicated Settings page instead of ScaningPage
 		try
 		{
 			await Navigation.PushAsync(new SettingsPage());

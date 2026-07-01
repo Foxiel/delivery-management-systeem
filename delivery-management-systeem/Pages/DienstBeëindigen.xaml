@@ -23,7 +23,7 @@
         </Grid>
 
         <!-- Overlay menu (hidden by default) -->
-        <Grid x:Name="MenuOverlay" IsVisible="False" ZIndex="100">
+        <Grid x:Name="MenuOverlay" IsVisible="False">
             <!-- dim background fills the whole overlay and closes menu when tapped -->
             <BoxView x:Name="OverlayBackground"
                      Color="#80000000"
@@ -36,10 +36,10 @@
 
             <!-- menu panel on the left -->
             <Frame x:Name="MenuPanel" BackgroundColor="#020A02" BorderColor="#00FF41" Padding="8" HasShadow="True"
-                   VerticalOptions="Start" HorizontalOptions="Start" Margin="10" CornerRadius="8" WidthRequest="280" ZIndex="101">
+                   VerticalOptions="Start" HorizontalOptions="Start" Margin="10" CornerRadius="8" WidthRequest="280">
                 <VerticalStackLayout Spacing="12">
                     <Button Text="Help" BackgroundColor="Transparent" TextColor="#00FF41" Clicked="OnHelpClickedFromMenu" />
-                    <Button x:Name="PauzeButton" Text="Pauze" BackgroundColor="Transparent" TextColor="#00FF41" Clicked="OnPauzeClickedFromMenu" />
+                    <Button x:Name="PauzeButton" Text="Pauze" BackgroundColor="Transparent" TextColor="#00FF41" Clicked="OnPauseClickedFromMenu" />
                     <Button Text="Settings" BackgroundColor="Transparent" TextColor="#00FF41" Clicked="OnSettingsClickedFromMenu" />
                     <Button Text="Afmelden" BackgroundColor="Transparent" TextColor="#FF4444" Clicked="OnLogoutClicked" />
                 </VerticalStackLayout>
