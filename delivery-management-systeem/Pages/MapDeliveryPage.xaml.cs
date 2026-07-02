@@ -3,7 +3,15 @@ namespace delivery_management_systeem.Pages;
 public partial class MapDeliveryPage : ContentPage
 {
     private bool isfinished = false;
-    
+
+    // ========================= MENU =========================
+    private Grid _menuOverlay;
+    private Frame _menuPanel;
+    private Button _pauseButton;
+
+    private bool _isPaused;
+    private const double _menuWidth = 280;
+
     public MapDeliveryPage()
     {
         InitializeComponent();
@@ -15,12 +23,11 @@ public partial class MapDeliveryPage : ContentPage
             Multiple = true
         };
     }
-    
+
     protected override void OnAppearing()
     {
         base.OnAppearing();
 
-        // Als we terugkomen van de HandtekeningPage en isfinished is true, pas de knop aan
         if (isfinished)
         {
             MainThread.BeginInvokeOnMainThread(() =>
@@ -29,6 +36,16 @@ public partial class MapDeliveryPage : ContentPage
                 ShowKaart();
             });
         }
+
+        _menuOverlay = this.FindByName<Grid>("MenuOverlay");
+        _menuPanel = this.FindByName<Frame>("MenuPanel");
+        _pauseButton = this.FindByName<Button>("PauzeButton");
+
+        if (_menuOverlay != null)
+            _menuOverlay.IsVisible = false;
+
+        if (_menuPanel != null)
+            _menuPanel.TranslationX = -_menuWidth;
     }
 
     private void KaartButton_Clicked(object sender, EventArgs e)
@@ -39,13 +56,9 @@ public partial class MapDeliveryPage : ContentPage
     private void BezorgingButton_Clicked(object sender, EventArgs e)
     {
         if (isfinished)
-        {
             AfmeldProcedure();
-        }
         else
-        {
             ShowBezorging();
-        }
     }
 
     private void SwipeLeft_Swiped(object sender, SwipedEventArgs e)
@@ -62,27 +75,18 @@ public partial class MapDeliveryPage : ContentPage
     {
         KaartGrid.IsVisible = true;
         BezorgGrid.IsVisible = false;
-
-        //KaartTabButton.BackgroundColor = Color.FromArgb("#003D12");
-        //BezorgingTabButton.BackgroundColor = Colors.Transparent;
     }
 
     private void ShowBezorging()
     {
         KaartGrid.IsVisible = false;
         BezorgGrid.IsVisible = true;
-
-        //KaartTabButton.BackgroundColor = Colors.Transparent;
-        //BezorgingTabButton.BackgroundColor = Color.FromArgb("#003D12");
     }
-    //=========================kaartpage==================================
 
     private async void RetourButton_Clicked(object sender, EventArgs e)
     {
         await Navigation.PushAsync(new RetourPage());
     }
-
-    //=========================deliverypage================================
 
     private void BarcodeReader_BarcodesDetected(object sender, ZXing.Net.Maui.BarcodeDetectionEventArgs e)
     {
@@ -91,7 +95,7 @@ public partial class MapDeliveryPage : ContentPage
         if (first != null)
         {
             Dispatcher.DispatchAsync(async () =>
-            { 
+            {
                 await DisplayAlertAsync(
                     "Barcode detected",
                     $"Type: {first.Format}\nValue: {first.Value}\nraw?: {first.Raw}",
@@ -104,14 +108,13 @@ public partial class MapDeliveryPage : ContentPage
     {
         deliverBarcodeReaderView.IsTorchOn = !deliverBarcodeReaderView.IsTorchOn;
     }
-    
+
     private async void Afronden_Clicked(object sender, EventArgs e)
     {
         isfinished = true;
-        
         await Navigation.PushAsync(new HandtekeningPage());
     }
-    
+
     private async void Help_Clicked(object sender, EventArgs e)
     {
         await Navigation.PushAsync(new HelpPage());
@@ -120,5 +123,73 @@ public partial class MapDeliveryPage : ContentPage
     private async void AfmeldProcedure()
     {
         await Navigation.PushAsync(new DienstBeëindigen());
+    }
+
+    // ========================= MENU FUNCTIES =========================
+
+    private async void OnMenuClicked(object sender, EventArgs e)
+    {
+        if (_menuOverlay == null || _menuPanel == null)
+            return;
+
+        if (!_menuOverlay.IsVisible)
+        {
+            _menuOverlay.IsVisible = true;
+            _menuPanel.TranslationX = -_menuWidth;
+            await _menuPanel.TranslateTo(0, 0, 250, Easing.SinOut);
+        }
+        else
+        {
+            await CloseMenu();
+        }
+    }
+
+    private async Task CloseMenu()
+    {
+        if (_menuPanel != null)
+            await _menuPanel.TranslateTo(-_menuWidth, 0, 200, Easing.SinIn);
+
+        if (_menuOverlay != null)
+            _menuOverlay.IsVisible = false;
+    }
+
+    private async void OnOverlayTapped(object sender, EventArgs e)
+    {
+        await CloseMenu();
+    }
+
+    private async void OnHelpClickedFromMenu(object sender, EventArgs e)
+    {
+        await CloseMenu();
+        await Navigation.PushAsync(new HelpPage());
+    }
+
+    private async void OnPauseClickedFromMenu(object sender, EventArgs e)
+    {
+        _isPaused = !_isPaused;
+
+        if (_pauseButton != null)
+            _pauseButton.Text = _isPaused ? "Hervatten" : "Pauze";
+
+        await CloseMenu();
+
+        await DisplayAlertAsync(
+            "Pauze",
+            _isPaused ? "Pauze gestart" : "Pauze gestopt",
+            "OK");
+    }
+
+    private async void OnSettingsClickedFromMenu(object sender, EventArgs e)
+    {
+        await CloseMenu();
+        await Navigation.PushAsync(new SettingsPage());
+    }
+
+    private async void OnLogoutClicked(object sender, EventArgs e)
+    {
+        await CloseMenu();
+
+        Application.Current.MainPage =
+            new NavigationPage(new DienstBeëindigen());
     }
 }

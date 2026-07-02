@@ -4,12 +4,73 @@
              x:Class="delivery_management_systeem.Pages.SettingsPage"
              BackgroundColor="#000000"
              Title="Instellingen">
-    <VerticalStackLayout Padding="20" Spacing="16">
-        <Label Text="" FontSize="24" TextColor="#00FF41" HorizontalOptions="Center" />
+    <Grid BackgroundColor="#000000">
+        
+        <Button x:Name="MenuButton"
+        Text="≡"
+        FontSize="24"
+        BackgroundColor="Transparent"
+        TextColor="#00FF41"
+        Clicked="OnMenuClicked"
+        HorizontalOptions="Start"
+        VerticalOptions="Start"
+        Margin="10"
+        ZIndex="90" />
+        
+        <VerticalStackLayout Padding="20" Spacing="16">
+            <Label Text="" FontSize="24" TextColor="#00FF41" HorizontalOptions="Center" />
 
-        <Label Text="Thema (Light / Dark)" TextColor="#00FF41" />
-        <Switch x:Name="ThemeSwitch" Toggled="OnThemeToggled" />
+            <Label Text="Thema (Light / Dark)" TextColor="#00FF41" />
+            <Switch x:Name="ThemeSwitch" Toggled="OnThemeToggled" />
 
-        <Button Text="Terug" BackgroundColor="#020A02" TextColor="#00FF41" Clicked="OnBackClicked" />
-    </VerticalStackLayout>
+            <Button Text="Terug" BackgroundColor="#020A02" TextColor="#00FF41" Clicked="OnBackClicked" />
+        </VerticalStackLayout>
+        <Grid x:Name="MenuOverlay"
+      IsVisible="False"
+      BackgroundColor="#80000000"
+      ZIndex="100">
+
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OnOverlayTapped" />
+            </Grid.GestureRecognizers>
+
+            <Frame x:Name="MenuPanel"
+           BackgroundColor="#020A02"
+           BorderColor="#00FF41"
+           Padding="8"
+           HasShadow="True"
+           VerticalOptions="Start"
+           HorizontalOptions="Start"
+           Margin="10"
+           CornerRadius="8"
+           WidthRequest="280"
+           ZIndex="101">
+
+                <VerticalStackLayout Spacing="12">
+
+                    <Button Text="Help"
+                    BackgroundColor="Transparent"
+                    TextColor="#00FF41"
+                    Clicked="OnHelpClickedFromMenu" />
+
+                    <Button x:Name="PauzeButton"
+                    Text="Pauze"
+                    BackgroundColor="Transparent"
+                    TextColor="#00FF41"
+                    Clicked="OnPauseClickedFromMenu" />
+
+                    <Button Text="Settings"
+                    BackgroundColor="Transparent"
+                    TextColor="#00FF41"
+                    Clicked="OnSettingsClickedFromMenu" />
+
+                    <Button Text="Afmelden"
+                    BackgroundColor="Transparent"
+                    TextColor="#FF4444"
+                    Clicked="OnLogoutClicked" />
+
+                </VerticalStackLayout>
+            </Frame>
+        </Grid>
+    </Grid>
 </ContentPage>

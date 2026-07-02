@@ -85,7 +85,7 @@ public partial class DienstBeëindigen : ContentPage
 
         await CloseMenu();
 
-        await DisplayAlert("Pauze",
+        await DisplayAlertAsync("Pauze",
             _isPaused ? "Pauze gestart" : "Pauze gestopt",
             "OK");
     }
@@ -99,9 +99,6 @@ public partial class DienstBeëindigen : ContentPage
     private async void OnLogoutClicked(object sender, EventArgs e)
     {
         await CloseMenu();
-
-        // CORRECT logout
-        Application.Current.MainPage =
-            new NavigationPage(new LoginPage());
+        await DisplayAlertAsync("Dienst stoppen", $"Je kunt niet meer terug ;)\n je moet nu je dienst beëindigen", "OK");
     }
 }

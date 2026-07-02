@@ -7,12 +7,12 @@ namespace delivery_management_systeem;
 
 public partial class App : Application
 {
-    public App()
+    public App(Pages.LoginPage loginPage)
     {
         InitializeComponent();
 
         // start altijd met NavigationPage
-        MainPage = new NavigationPage(new LoginPage());
+        MainPage = new NavigationPage(loginPage);
     }
 }
 

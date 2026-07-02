@@ -6,70 +6,129 @@
     BackgroundColor="#000000"
     NavigationPage.HasNavigationBar="False">
 
-    <Grid Padding="30" RowDefinitions="Auto,*">
+    <Grid>
+        <Grid Padding="30" RowDefinitions="Auto,*">
+            <Button x:Name="MenuButton"
+    Text="≡"
+    FontSize="24"
+    BackgroundColor="Transparent"
+    TextColor="#00FF41"
+    Clicked="OnMenuClicked"
+    HorizontalOptions="Start"
+    VerticalOptions="Start"
+    Margin="10"
+    ZIndex="90" />
 
-        <VerticalStackLayout
-            Grid.Row="1"
-            VerticalOptions="Center"
-            Spacing="25">
+            <VerticalStackLayout
+        Grid.Row="1"
+        VerticalOptions="Center"
+        Spacing="25">
 
-            <Label
-                Text="HELP &amp; SUPPORT"
-                FontSize="32"
-                FontAttributes="Bold"
-                TextColor="#00FF41"
-                HorizontalTextAlignment="Center" />
+                <Label
+            Text="HELP &amp; SUPPORT"
+            FontSize="32"
+            FontAttributes="Bold"
+            TextColor="#00FF41"
+            HorizontalTextAlignment="Center" />
 
-            <Border
-                Padding="25"
-                BackgroundColor="#020A02"
-                Stroke="#00FF41"
-                StrokeThickness="2"
-                StrokeShape="RoundRectangle 20">
+                <Border
+            Padding="25"
+            BackgroundColor="#020A02"
+            Stroke="#00FF41"
+            StrokeThickness="2"
+            StrokeShape="RoundRectangle 20">
 
-                <VerticalStackLayout Spacing="18">
+                    <VerticalStackLayout Spacing="18">
 
-                    <Entry
-                        x:Name="SubjectEntry"
-                        Placeholder="Onderwerp"
-                        TextColor="#00FF41"
-                        PlaceholderColor="#00CC33"
-                        BackgroundColor="#000000" />
+                        <Entry
+                    x:Name="SubjectEntry"
+                    Placeholder="Onderwerp"
+                    TextColor="#00FF41"
+                    PlaceholderColor="#00CC33"
+                    BackgroundColor="#000000" />
 
-                    <Editor
-                        x:Name="DescriptionEditor"
-                        Placeholder="Beschrijf je probleem..."
-                        HeightRequest="160"
-                        TextColor="#00FF41"
-                        PlaceholderColor="#00CC33"
-                        BackgroundColor="#000000" />
+                        <Editor
+                    x:Name="DescriptionEditor"
+                    Placeholder="Beschrijf je probleem..."
+                    HeightRequest="160"
+                    TextColor="#00FF41"
+                    PlaceholderColor="#00CC33"
+                    BackgroundColor="#000000" />
 
-                    <Button
-                        Text="TICKET VERZENDEN"
-                        HeightRequest="55"
-                        BackgroundColor="#020A02"
-                        BorderColor="#00FF41"
-                        BorderWidth="2"
-                        TextColor="#00FF41"
-                        CornerRadius="12"
-                        Clicked="OnSendTicketClicked" />
+                        <Button
+                    Text="TICKET VERZENDEN"
+                    HeightRequest="55"
+                    BackgroundColor="#020A02"
+                    BorderColor="#00FF41"
+                    BorderWidth="2"
+                    TextColor="#00FF41"
+                    CornerRadius="12"
+                    Clicked="OnSendTicketClicked" />
+
+                    </VerticalStackLayout>
+                </Border>
+
+                <Button
+            Text="← TERUG"
+            WidthRequest="120"
+            HeightRequest="45"
+            BackgroundColor="#020A02"
+            BorderColor="#00FF41"
+            BorderWidth="1"
+            TextColor="#00FF41"
+            CornerRadius="10"
+            Clicked="OnBackClicked" />
+
+            </VerticalStackLayout>
+
+            
+        </Grid>
+        <Grid x:Name="MenuOverlay"
+IsVisible="False"
+BackgroundColor="#80000000"
+ZIndex="100">
+
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OnOverlayTapped" />
+            </Grid.GestureRecognizers>
+
+            <Frame x:Name="MenuPanel"
+     BackgroundColor="#020A02"
+     BorderColor="#00FF41"
+     Padding="8"
+     HasShadow="True"
+     VerticalOptions="Start"
+     HorizontalOptions="Start"
+     Margin="10"
+     CornerRadius="8"
+     WidthRequest="280"
+     ZIndex="101">
+
+                <VerticalStackLayout Spacing="12">
+
+                    <Button Text="Help"
+              BackgroundColor="Transparent"
+              TextColor="#00FF41"
+              Clicked="OnHelpClickedFromMenu" />
+
+                    <Button x:Name="PauzeButton"
+              Text="Pauze"
+              BackgroundColor="Transparent"
+              TextColor="#00FF41"
+              Clicked="OnPauseClickedFromMenu" />
+
+                    <Button Text="Settings"
+              BackgroundColor="Transparent"
+              TextColor="#00FF41"
+              Clicked="OnSettingsClickedFromMenu" />
+
+                    <Button Text="Afmelden"
+              BackgroundColor="Transparent"
+              TextColor="#FF4444"
+              Clicked="OnLogoutClicked" />
 
                 </VerticalStackLayout>
-            </Border>
-            
-            <Button
-                Text="← TERUG"
-                WidthRequest="120"
-                HeightRequest="45"
-                BackgroundColor="#020A02"
-                BorderColor="#00FF41"
-                BorderWidth="1"
-                TextColor="#00FF41"
-                CornerRadius="10"
-                Clicked="OnBackClicked" />
-            
-        </VerticalStackLayout>
-        
-
+            </Frame>
+        </Grid>
     </Grid>
 </ContentPage>

@@ -1,3 +1,5 @@
+using Android.OS;
+
 namespace delivery_management_systeem.Pages;
 
 using System.Collections.ObjectModel;
@@ -203,6 +205,9 @@ public class DienstBeëindingenFotoViewModel : INotifyPropertyChanged
 
         try
         {
+            var services = Application.Current?.MainPage?.Handler?.MauiContext?.Services;
+            var loginPage = IPlatformApplication.Current?.Services.GetService<delivery_management_systeem.Pages.LoginPage>();
+            
             // WHAT: Save photo and service completion
             // HOW: Call service/repository to persist shift completion
             // WHY: Records end of shift with photographic evidence
@@ -217,7 +222,14 @@ public class DienstBeëindingenFotoViewModel : INotifyPropertyChanged
             // WHAT: Return to home screen
             // HOW: Navigate back to beginning of app (or dedicated home page)
             // WHY: Completes workflow and shows delivery completed state
-            await Application.Current.MainPage.Navigation.PushAsync(new LoginPage());
+            if (loginPage != null)
+            {
+                Application.Current.MainPage = new NavigationPage(loginPage);
+            }
+            else
+            {
+                await Application.Current.MainPage.DisplayAlertAsync("Navigatie", "Kan niet terugkeren naar het startscherm.", "OK");
+            }
             // Alternative: await Navigation.PopToRootAsync();
         }
         catch (Exception ex)

@@ -9,6 +9,7 @@
 
     <Grid BackgroundColor="#000"
           Padding="10">
+        
 
         <Grid.GestureRecognizers>
             <SwipeGestureRecognizer Direction="Left"
@@ -17,327 +18,414 @@
                                     Swiped="SwipeRight_Swiped" />
         </Grid.GestureRecognizers>
 
-        <Grid RowDefinitions="Auto,*">
+        <Grid>
+            <Grid RowDefinitions="Auto,*">
+                
 
-            <!-- Kleine tab balk 
-            <Border Grid.Row="0"
-                    Stroke="#00FF41"
-                    StrokeThickness="2"
-                    StrokeShape="RoundRectangle 18"
-                    HeightRequest="30"
-                    WidthRequest="150"
-                    HorizontalOptions="Center"
-                    BackgroundColor="#020A02"
-                    Margin="0,0,0,10">
+                <!-- Kleine tab balk 
+      <Border Grid.Row="0"
+              Stroke="#00FF41"
+              StrokeThickness="2"
+              StrokeShape="RoundRectangle 18"
+              HeightRequest="30"
+              WidthRequest="150"
+              HorizontalOptions="Center"
+              BackgroundColor="#020A02"
+              Margin="0,0,0,10">
 
-                <Grid ColumnDefinitions="*,*">
+          <Grid ColumnDefinitions="*,*">
 
-                    <Button x:Name="KaartTabButton"
-                            Grid.Column="0"
-                            Text="kaart"
-                            Clicked="KaartButton_Clicked"
-                            BackgroundColor="#003D12"
-                            TextColor="#00FF41"
-                            FontSize="13"
-                            Padding="0" />
+              <Button x:Name="KaartTabButton"
+                      Grid.Column="0"
+                      Text="kaart"
+                      Clicked="KaartButton_Clicked"
+                      BackgroundColor="#003D12"
+                      TextColor="#00FF41"
+                      FontSize="13"
+                      Padding="0" />
 
-                    <BoxView Grid.Column="0"
-                             HorizontalOptions="End"
-                             WidthRequest="2"
-                             Color="#00FF41" />
+              <BoxView Grid.Column="0"
+                       HorizontalOptions="End"
+                       WidthRequest="2"
+                       Color="#00FF41" />
 
-                    <Button x:Name="BezorgingTabButton"
-                            Grid.Column="1"
-                            Text="bezorging"
-                            Clicked="BezorgingButton_Clicked"
+              <Button x:Name="BezorgingTabButton"
+                      Grid.Column="1"
+                      Text="bezorging"
+                      Clicked="BezorgingButton_Clicked"
+                      BackgroundColor="Transparent"
+                      TextColor="#00FF41"
+                      FontSize="13"
+                      Padding="0" />
+
+          </Grid>
+      </Border>-->
+
+                <!-- ======================================================================= -->
+                <!-- =============================Kaart pagina============================== -->
+                <!-- ======================================================================= -->
+                
+                <Grid x:Name="KaartGrid"
+            Grid.Row="1"
+            RowDefinitions="90,*,220"
+            BackgroundColor="#000">
+                    <Grid Grid.Row="0">
+                        <Button
+                            Text="≡"
+                            FontSize="24"
                             BackgroundColor="Transparent"
                             TextColor="#00FF41"
-                            FontSize="13"
-                            Padding="0" />
+                            Clicked="OnMenuClicked"
+                            HorizontalOptions="Start"
+                            VerticalOptions="Start"
+                            Margin="10"
+                            ZIndex="90" />
 
-                </Grid>
-            </Border>-->
-
-            <!-- ======================================================================= -->
-            <!-- =============================Kaart pagina============================== -->
-            <!-- ======================================================================= -->
-            <Grid x:Name="KaartGrid"
-                  Grid.Row="1"
-                  RowDefinitions="*,220"
-                  BackgroundColor="#000">
-
-                <Border Grid.Row="0"
-                        Stroke="#00FF41"
-                        StrokeThickness="2"
-                        StrokeShape="RoundRectangle 12"
-                        BackgroundColor="#020A02">
-
-                    <Grid>
-                        <Image Source="route.png"
-                               HorizontalOptions="Center"
-                               VerticalOptions="Center"
-                               Aspect="AspectFit" />
-
-                    </Grid>
-                </Border>
-
-                <Border Grid.Row="1"
-                        Margin="0,15,0,0"
-                        Stroke="#00FF41"
-                        StrokeThickness="2"
-                        StrokeShape="RoundRectangle 12"
-                        BackgroundColor="#020A02">
-
-                    <Grid RowDefinitions="*,Auto"
-                          ColumnDefinitions="*,*"
-                          Padding="15">
-
-                        <VerticalStackLayout Grid.Column="0"
-                                             Spacing="5">
-
-                            <Label Text="ADRES"
-                                   TextColor="#00FF41"
-                                   FontAttributes="Bold"
-                                   FontSize="16" />
-
-                            <Label Text="Hoofdstraat 1"
-                                   TextColor="#00FF41"
-                                   FontSize="14" />
-
-                            <Label Text="6211AA Maastricht"
-                                   TextColor="#00FF41"
-                                   FontSize="14" />
-                        </VerticalStackLayout>
-
-                        <VerticalStackLayout Grid.Column="1"
-                                             Spacing="5">
-
-                            <Label Text="VOLGENDE ADRES"
-                                   TextColor="#00FF41"
-                                   FontAttributes="Bold"
-                                   FontSize="16" />
-
-                            <Label Text="Kerkstraat 10"
-                                   TextColor="#00FF41"
-                                   FontSize="14" />
-
-                            <Label Text="6221BB Heerlen"
-                                   TextColor="#00FF41"
-                                   FontSize="14" />
-                        </VerticalStackLayout>
-
-                        <Button x:Name="BezorgingButton"
-                                Grid.Row="1"
-                                Grid.ColumnSpan="1"
-                                Text="BEZORGEN"
-                                Clicked="BezorgingButton_Clicked"
-                                WidthRequest="150"
-                                HeightRequest="50"
-                                BackgroundColor="#020A02"
-                                BorderColor="#00FF41"
-                                BorderWidth="2"
-                                TextColor="#00FF41"
-                                FontAttributes="Bold"
-                                HorizontalOptions="Start"
-                                Margin="0,15,0,0" />
+                        <Label
+                            Text="Route"
+                            TextColor="#00FF41"
+                            FontAttributes="Bold"
+                            HorizontalOptions="Start"
+                            VerticalOptions="Center"
+                            Padding="60,0,0,0"
+                            FontSize="40"/>
+                            
                         
-                        <Button Grid.Row="1"
-                                Grid.ColumnSpan="2"
-                                Text="RETOUR"
-                                Clicked="RetourButton_Clicked"
-                                WidthRequest="150"
-                                HeightRequest="50"
-                                BackgroundColor="#020A02"
-                                BorderColor="#00FF41"
-                                BorderWidth="2"
-                                TextColor="#00FF41"
-                                FontAttributes="Bold"
-                                HorizontalOptions="End"
-                                Margin="0,15,0,0" />
-
                     </Grid>
-                </Border>
-            </Grid>
+                    
 
-            <!-- ======================================================================= -->
-            <!-- ==========================BEZORG PAGINA================================ -->
-            <!-- ======================================================================= -->
-            <Grid x:Name="BezorgGrid"
-                    Grid.Row="1"
-                    RowDefinitions="Auto,300,Auto,Auto,*,Auto"
-                    BackgroundColor="#000"
-                    RowSpacing="12"
-                    IsVisible="False">
+                    <Border Grid.Row="1"
+                  Stroke="#00FF41"
+                  StrokeThickness="2"
+                  StrokeShape="RoundRectangle 12"
+                  BackgroundColor="#020A02">
 
-                <Label Grid.Row="0"
-                       Text="Scan de packetjes"
-                       TextColor="#00FF41"
-                       FontAttributes="Bold"
-                       HorizontalOptions="Center"
-                       VerticalOptions="Start"
-                       FontSize="30"/>
+                        <Grid>
+                            <Image Source="route.png"
+                         HorizontalOptions="Center"
+                         VerticalOptions="Center"
+                         Aspect="AspectFit" />
 
-                <Border Grid.Row="1"
-                    Stroke="#00FF41"
-                    StrokeThickness="2"
-                    StrokeShape="RoundRectangle 12"
-                    BackgroundColor="#020A02">
+                        </Grid>
+                    </Border>
 
-                <zxing:CameraBarcodeReaderView
-                    x:Name="deliverBarcodeReaderView"
-                    BarcodesDetected="BarcodeReader_BarcodesDetected"
-                    HorizontalOptions="Fill"
-                    VerticalOptions="Fill" />
+                    <Border Grid.Row="2"
+                  Margin="0,15,0,0"
+                  Stroke="#00FF41"
+                  StrokeThickness="2"
+                  StrokeShape="RoundRectangle 12"
+                  BackgroundColor="#020A02">
 
-                </Border>
+                        <Grid RowDefinitions="*,Auto"
+                    ColumnDefinitions="*,*"
+                    Padding="15">
 
-                <!-- Handmatige barcode invoer -->
-                  <Grid Grid.Row="2"
-                        RowDefinitions="auto,auto"
-                        ColumnDefinitions="*,Auto"
-                        Margin="0,0,0,10"
-                        ColumnSpacing="10">
+                            <VerticalStackLayout Grid.Column="0"
+                                       Spacing="5">
 
-                    <Label Grid.Row="0"
-                           Grid.ColumnSpan="2"
-                           Text="Zelf barcode invullen"
-                           TextColor="#00FF41"
-                           HorizontalOptions="Start" />
+                                <Label Text="ADRES"
+                             TextColor="#00FF41"
+                             FontAttributes="Bold"
+                             FontSize="16" />
 
+                                <Label Text="Hoofdstraat 1"
+                             TextColor="#00FF41"
+                             FontSize="14" />
 
-                    <Border Grid.Column="0"
-                            Grid.Row="1"
-                              Stroke="#00FF41"
-                              StrokeThickness="2"
-                              StrokeShape="RoundRectangle 12"
-                              BackgroundColor="#020A02"
-                              Padding="0">
+                                <Label Text="6211AA Maastricht"
+                             TextColor="#00FF41"
+                             FontSize="14" />
+                            </VerticalStackLayout>
 
-                          <Entry x:Name="ManualBarcodeEntry"
-                                 Placeholder="Voer barcode in"
-                                 TextColor="#FFFFFF"
-                                 PlaceholderColor="#777"
-                                 BackgroundColor="Transparent"
-                                 Margin="12,10" />
-                      </Border>
+                            <VerticalStackLayout Grid.Column="1"
+                                       Spacing="5">
 
-                      <Button Grid.Column="1"
-                              Grid.Row="1"
-                              Text="+"
-                              WidthRequest="50"
-                              HeightRequest="50"
-                              CornerRadius="12"
-                              BackgroundColor="#003D12"
-                              TextColor="#00FF41"
-                              FontSize="24"
-                              FontAttributes="Bold"
-                              VerticalOptions="Center" />
-                  </Grid>
+                                <Label Text="VOLGENDE ADRES"
+                             TextColor="#00FF41"
+                             FontAttributes="Bold"
+                             FontSize="16" />
 
-                <!-- Scanner vlak -->
-                <Label Grid.Row="3"
-                       Text="pakketjeslijst"
-                       TextColor="#00FF41"
-                       FontAttributes="Bold"
-                       HorizontalOptions="Start" />
+                                <Label Text="Kerkstraat 10"
+                             TextColor="#00FF41"
+                             FontSize="14" />
 
-                <!-- Tabel -->
-                <Border Grid.Row="4"
-                          Stroke="#00FF41"
-                          StrokeThickness="2"
-                          StrokeShape="RoundRectangle 12"
+                                <Label Text="6221BB Heerlen"
+                             TextColor="#00FF41"
+                             FontSize="14" />
+                            </VerticalStackLayout>
+
+                            <Button x:Name="BezorgingButton"
+                          Grid.Row="1"
+                          Grid.ColumnSpan="1"
+                          Text="BEZORGEN"
+                          Clicked="BezorgingButton_Clicked"
+                          WidthRequest="150"
+                          HeightRequest="50"
                           BackgroundColor="#020A02"
-                          Margin="0,0,0,10"
-                          Padding="10">
-
-                    <Grid RowDefinitions="Auto,Auto,Auto,Auto"
-                            ColumnDefinitions="*,*,*"
-                            RowSpacing="8"
-                            ColumnSpacing="10">
-
-                          <Label Grid.Row="0" Grid.Column="0"
-                                 Text="Barcode"
-                                 TextColor="#00FF41"
-                                 FontAttributes="Bold" />
-                          <Label Grid.Row="0" Grid.Column="1"
-                                 Text="Zone"
-                                 TextColor="#00FF41"
-                                 FontAttributes="Bold" />
-                          <Label Grid.Row="0" Grid.Column="2"
-                                 Text="Hulp"
-                                 TextColor="#00FF41"
-                                 FontAttributes="Bold" />
-
-                          <Label Grid.Row="1" Grid.Column="0"
-                                 Text="123456789"
-                                 TextColor="#FFFFFF" />
-                          <Label Grid.Row="1" Grid.Column="1"
-                                 Text="A1"
-                                 TextColor="#FFFFFF" />
-                          <Button
-                                 Grid.Row="1" Grid.Column="2"
-                                 Text="?"
-                                 Clicked="Help_Clicked"
-                                 WidthRequest="40"
-                                 HeightRequest="30"
-                                 BackgroundColor="#020A02"
-                                 BorderColor="#00FF41"
-                                 CornerRadius="25"
-                                 BorderWidth="2"
-                                 TextColor="#00FF41" />
-
-                          <Label Grid.Row="2" Grid.Column="0"
-                                 Text="987654321"
-                                 TextColor="#FFFFFF" />
-                          <Label Grid.Row="2" Grid.Column="1"
-                                 Text="B3"
-                                 TextColor="#FFFFFF" />
-                          <Button
-                                 Grid.Row="2" Grid.Column="2"
-                                 Text="?"
-                                 Clicked="Help_Clicked"
-                                 WidthRequest="40"
-                                 HeightRequest="30"
-                                 BackgroundColor="#020A02"
-                                 BorderColor="#00FF41"
-                                 CornerRadius="25"
-                                 BorderWidth="2"
-                                 TextColor="#00FF41" />
-
-                          <Label Grid.Row="3" Grid.Column="0"
-                                 Text="555666777"
-                                 TextColor="#FFFFFF" />
-                          <Label Grid.Row="3" Grid.Column="1"
-                                 Text="C2"
-                                 TextColor="#FFFFFF" />
-                          <Button
-                                 Grid.Row="3" Grid.Column="2"
-                                 Text="?"
-                                 Clicked="Help_Clicked"
-                                 WidthRequest="40"
-                                 HeightRequest="30"
-                                 BackgroundColor="#020A02"
-                                 BorderColor="#00FF41"
-                                 CornerRadius="25"
-                                 BorderWidth="2"
-                                 TextColor="#00FF41" />
-                      </Grid>
-                  </Border>
-
-                  <Button Grid.Row="5"
-                          Text="BEZORGING AFRONDEN"
-                          Clicked="Afronden_Clicked"
-                          HeightRequest="55"
-                          BackgroundColor="#003D12"
                           BorderColor="#00FF41"
                           BorderWidth="2"
                           TextColor="#00FF41"
                           FontAttributes="Bold"
-                          HorizontalOptions="Fill"
-                          Margin="0,0,0,10" />
+                          HorizontalOptions="Start"
+                          Margin="0,15,0,0" />
 
-              </Grid>
+                            <Button Grid.Row="1"
+                          Grid.ColumnSpan="2"
+                          Text="RETOUR"
+                          Clicked="RetourButton_Clicked"
+                          WidthRequest="150"
+                          HeightRequest="50"
+                          BackgroundColor="#020A02"
+                          BorderColor="#00FF41"
+                          BorderWidth="2"
+                          TextColor="#00FF41"
+                          FontAttributes="Bold"
+                          HorizontalOptions="End"
+                          Margin="0,15,0,0" />
 
+                        </Grid>
+                    </Border>
+                </Grid>
+
+                <!-- ======================================================================= -->
+                <!-- ==========================BEZORG PAGINA================================ -->
+                <!-- ======================================================================= -->
+                <Grid x:Name="BezorgGrid"
+              Grid.Row="1"
+              RowDefinitions="Auto,300,Auto,Auto,*,Auto"
+              BackgroundColor="#000"
+              RowSpacing="12"
+              IsVisible="False">
+                    <Button
+                        Text="≡"
+                        FontSize="24"
+                        BackgroundColor="Transparent"
+                        TextColor="#00FF41"
+                        Clicked="OnMenuClicked"
+                        HorizontalOptions="Start"
+                        VerticalOptions="Start"
+                        Margin="10"
+                        ZIndex="90" />
+
+                    <Label Grid.Row="0"
+                 Text="Scan de packetjes"
+                 TextColor="#00FF41"
+                 FontAttributes="Bold"
+                 HorizontalOptions="Start"
+                 VerticalOptions="Center"
+                 Padding="60,0,0,0"
+                 FontSize="30"/>
+
+                    <Border Grid.Row="1"
+              Stroke="#00FF41"
+              StrokeThickness="2"
+              StrokeShape="RoundRectangle 12"
+              BackgroundColor="#020A02">
+
+                        <zxing:CameraBarcodeReaderView
+              x:Name="deliverBarcodeReaderView"
+              BarcodesDetected="BarcodeReader_BarcodesDetected"
+              HorizontalOptions="Fill"
+              VerticalOptions="Fill" />
+
+                    </Border>
+
+                    <!-- Handmatige barcode invoer -->
+                    <Grid Grid.Row="2"
+                  RowDefinitions="auto,auto"
+                  ColumnDefinitions="*,Auto"
+                  Margin="0,0,0,10"
+                  ColumnSpacing="10">
+
+                        <Label Grid.Row="0"
+                     Grid.ColumnSpan="2"
+                     Text="Zelf barcode invullen"
+                     TextColor="#00FF41"
+                     HorizontalOptions="Start" />
+
+
+                        <Border Grid.Column="0"
+                      Grid.Row="1"
+                        Stroke="#00FF41"
+                        StrokeThickness="2"
+                        StrokeShape="RoundRectangle 12"
+                        BackgroundColor="#020A02"
+                        Padding="0">
+
+                            <Entry x:Name="ManualBarcodeEntry"
+                           Placeholder="Voer barcode in"
+                           TextColor="#FFFFFF"
+                           PlaceholderColor="#777"
+                           BackgroundColor="Transparent"
+                           Margin="12,10" />
+                        </Border>
+
+                        <Button Grid.Column="1"
+                        Grid.Row="1"
+                        Text="+"
+                        WidthRequest="50"
+                        HeightRequest="50"
+                        CornerRadius="12"
+                        BackgroundColor="#003D12"
+                        TextColor="#00FF41"
+                        FontSize="24"
+                        FontAttributes="Bold"
+                        VerticalOptions="Center" />
+                    </Grid>
+
+                    <!-- Scanner vlak -->
+                    <Label Grid.Row="3"
+                 Text="pakketjeslijst"
+                 TextColor="#00FF41"
+                 FontAttributes="Bold"
+                 HorizontalOptions="Start" />
+
+                    <!-- Tabel -->
+                    <Border Grid.Row="4"
+                    Stroke="#00FF41"
+                    StrokeThickness="2"
+                    StrokeShape="RoundRectangle 12"
+                    BackgroundColor="#020A02"
+                    Margin="0,0,0,10"
+                    Padding="10">
+
+                        <Grid RowDefinitions="Auto,Auto,Auto,Auto"
+                      ColumnDefinitions="*,*,*"
+                      RowSpacing="8"
+                      ColumnSpacing="10">
+
+                            <Label Grid.Row="0" Grid.Column="0"
+                           Text="Barcode"
+                           TextColor="#00FF41"
+                           FontAttributes="Bold" />
+                            <Label Grid.Row="0" Grid.Column="1"
+                           Text="Zone"
+                           TextColor="#00FF41"
+                           FontAttributes="Bold" />
+                            <Label Grid.Row="0" Grid.Column="2"
+                           Text="Hulp"
+                           TextColor="#00FF41"
+                           FontAttributes="Bold" />
+
+                            <Label Grid.Row="1" Grid.Column="0"
+                           Text="123456789"
+                           TextColor="#FFFFFF" />
+                            <Label Grid.Row="1" Grid.Column="1"
+                           Text="A1"
+                           TextColor="#FFFFFF" />
+                            <Button
+                           Grid.Row="1" Grid.Column="2"
+                           Text="?"
+                           Clicked="Help_Clicked"
+                           WidthRequest="40"
+                           HeightRequest="30"
+                           BackgroundColor="#020A02"
+                           BorderColor="#00FF41"
+                           CornerRadius="25"
+                           BorderWidth="2"
+                           TextColor="#00FF41" />
+
+                            <Label Grid.Row="2" Grid.Column="0"
+                           Text="987654321"
+                           TextColor="#FFFFFF" />
+                            <Label Grid.Row="2" Grid.Column="1"
+                           Text="B3"
+                           TextColor="#FFFFFF" />
+                            <Button
+                           Grid.Row="2" Grid.Column="2"
+                           Text="?"
+                           Clicked="Help_Clicked"
+                           WidthRequest="40"
+                           HeightRequest="30"
+                           BackgroundColor="#020A02"
+                           BorderColor="#00FF41"
+                           CornerRadius="25"
+                           BorderWidth="2"
+                           TextColor="#00FF41" />
+
+                            <Label Grid.Row="3" Grid.Column="0"
+                           Text="555666777"
+                           TextColor="#FFFFFF" />
+                            <Label Grid.Row="3" Grid.Column="1"
+                           Text="C2"
+                           TextColor="#FFFFFF" />
+                            <Button
+                           Grid.Row="3" Grid.Column="2"
+                           Text="?"
+                           Clicked="Help_Clicked"
+                           WidthRequest="40"
+                           HeightRequest="30"
+                           BackgroundColor="#020A02"
+                           BorderColor="#00FF41"
+                           CornerRadius="25"
+                           BorderWidth="2"
+                           TextColor="#00FF41" />
+                        </Grid>
+                    </Border>
+
+                    <Button Grid.Row="5"
+                    Text="BEZORGING AFRONDEN"
+                    Clicked="Afronden_Clicked"
+                    HeightRequest="55"
+                    BackgroundColor="#003D12"
+                    BorderColor="#00FF41"
+                    BorderWidth="2"
+                    TextColor="#00FF41"
+                    FontAttributes="Bold"
+                    HorizontalOptions="Fill"
+                    Margin="0,0,0,10" />
+                </Grid>
+
+                </Grid>
+                <Grid x:Name="MenuOverlay"
+IsVisible="False"
+BackgroundColor="#80000000"
+ZIndex="100">
+
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnOverlayTapped" />
+                    </Grid.GestureRecognizers>
+
+                    <Frame x:Name="MenuPanel"
+     BackgroundColor="#020A02"
+     BorderColor="#00FF41"
+     Padding="8"
+     HasShadow="True"
+     VerticalOptions="Start"
+     HorizontalOptions="Start"
+     Margin="10"
+     CornerRadius="8"
+     WidthRequest="280"
+     ZIndex="101">
+
+                        <VerticalStackLayout Spacing="12">
+
+                            <Button Text="Help"
+              BackgroundColor="Transparent"
+              TextColor="#00FF41"
+              Clicked="OnHelpClickedFromMenu" />
+
+                            <Button x:Name="PauzeButton"
+              Text="Pauze"
+              BackgroundColor="Transparent"
+              TextColor="#00FF41"
+              Clicked="OnPauseClickedFromMenu" />
+
+                            <Button Text="Settings"
+              BackgroundColor="Transparent"
+              TextColor="#00FF41"
+              Clicked="OnSettingsClickedFromMenu" />
+
+                            <Button Text="Afmelden"
+              BackgroundColor="Transparent"
+              TextColor="#FF4444"
+              Clicked="OnLogoutClicked" />
+
+                        </VerticalStackLayout>
+                    </Frame>
+                </Grid>
+
+            
         </Grid>
 
     </Grid>
