@@ -6,110 +6,163 @@
              BackgroundColor="#000000"
              NavigationPage.HasNavigationBar="False">
 
-    <VerticalStackLayout Padding="15" Spacing="15" BackgroundColor="#000000">
+    <Grid BackgroundColor="#000000">
 
-        <!-- Top bar with menu (left) and help (right) -->
-        <Grid ColumnDefinitions="Auto,*,Auto" VerticalOptions="Start" Margin="0,6">
-            <Button x:Name="MenuButton"
+        <!-- NORMALE CONTENT -->
+        <VerticalStackLayout Padding="15" Spacing="15" BackgroundColor="#000000">
+
+            <Grid ColumnDefinitions="Auto,*,Auto" VerticalOptions="Start" Margin="0,6">
+                <Button x:Name="MenuButton"
                         Text="≡"
                         FontSize="24"
                         BackgroundColor="Transparent"
                         TextColor="#00FF41"
                         Clicked="OnMenuClicked"
                         HorizontalOptions="Start" />
+            </Grid>
+
+
+            <!-- WHAT: Photo section heading
+                 HOW: Bold label indicating photo requirement
+                 WHY: Clear section title for user guidance -->
+            <Label 
+                Text="Foto"
+                FontSize="24"
+                FontAttributes="Bold"
+                TextColor="#00FF41"
+                HorizontalOptions="Center" />
+
+            <!-- WHAT: Photo placeholder/display area
+                 HOW: Frame with Border containing Image + fallback label
+                 WHY: Visually designated area for vehicle photo with clear boundaries -->
+            <Border Padding="10" 
+                    BackgroundColor="#020A02" 
+                    Stroke="#00FF41" 
+                    StrokeThickness="2"
+                    StrokeShape="RoundRectangle 12"
+                    HeightRequest="280"
+                    HorizontalOptions="FillAndExpand">
+                <Grid>
+                    <!-- Image control for displaying captured photo -->
+                    <Image 
+                        x:Name="VehiclePhotoImage"
+                        Source="{Binding VehiclePhoto}"
+                        Aspect="AspectFill"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand" />
+
+                    <!-- Fallback label when no photo is taken -->
+                    <Label 
+                        x:Name="NoPhotoLabel"
+                        Text="📷"
+                        FontSize="72"
+                        TextColor="#00FF41"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        IsVisible="{Binding IsNoPhotoVisible}" />
+                </Grid>
+            </Border>
+
+            <!-- WHAT: Instruction label for photo requirement
+                 HOW: Clear, descriptive text below photo area
+                 WHY: Instructs user on what photo is needed and why -->
+            <Label 
+                Text="Maak een foto van het voertuig op de juiste parkeerplek."
+                TextColor="#00FF41"
+                FontSize="14"
+                HorizontalOptions="Center"
+                HorizontalTextAlignment="Center"
+                LineBreakMode="WordWrap"
+                Margin="10" />
+
+            <!-- WHAT: Spacer to push button to bottom
+                 HOW: VerticalOptions.FillAndExpand on this BoxView
+                 WHY: Ensures button placement at bottom of screen -->
+            <BoxView VerticalOptions="FillAndExpand" />
+
+            <!-- WHAT: Take photo button - primary action
+                 HOW: Command binding to TakePhotoCommand in ViewModel
+                 WHY: Initiates camera/media picker for photo capture -->
+            <Button 
+                Text="📷 Foto maken"
+                HeightRequest="55"
+                BackgroundColor="#020A02"
+                BorderColor="#00FF41"
+                BorderWidth="2"
+                TextColor="#00FF41"
+                CornerRadius="12"
+                FontSize="16"
+                FontAttributes="Bold"
+                Command="{Binding TakePhotoCommand}"
+                Margin="0,10" />
+
+            <!-- WHAT: End service button - secondary action
+                 HOW: Command binding to FinishShiftCommand, disabled until photo taken
+                 WHY: Completes workflow only when photo has been captured successfully -->
+            <Button
+                Text="Eind dienst"
+                HeightRequest="60"
+                BackgroundColor="#020A02"
+                BorderColor="#00FF41"
+                BorderWidth="2"
+                TextColor="#00FF41"
+                CornerRadius="12"
+                FontSize="18"
+                FontAttributes="Bold"
+                IsEnabled="{Binding CanFinishRoute}"
+                Command="{Binding FinishShiftCommand}" />
+
+        </VerticalStackLayout>
+
+        <!-- OVERLAY MENU OVER DE CONTENT HEEN -->
+        <Grid x:Name="MenuOverlay"
+              IsVisible="False"
+              BackgroundColor="#80000000"
+              ZIndex="100">
+
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OnOverlayTapped" />
+            </Grid.GestureRecognizers>
+
+            <Frame x:Name="MenuPanel"
+                   BackgroundColor="#020A02"
+                   BorderColor="#00FF41"
+                   Padding="8"
+                   HasShadow="True"
+                   VerticalOptions="Start"
+                   HorizontalOptions="Start"
+                   Margin="10"
+                   CornerRadius="8"
+                   WidthRequest="280"
+                   ZIndex="101">
+
+                <VerticalStackLayout Spacing="12">
+                    <Button Text="Help"
+                            BackgroundColor="Transparent"
+                            TextColor="#00FF41"
+                            Clicked="OnHelpClickedFromMenu" />
+
+                    <Button x:Name="PauzeButton"
+                            Text="Pauze"
+                            BackgroundColor="Transparent"
+                            TextColor="#00FF41"
+                            Clicked="OnPauseClickedFromMenu" />
+
+                    <Button Text="Settings"
+                            BackgroundColor="Transparent"
+                            TextColor="#00FF41"
+                            Clicked="OnSettingsClickedFromMenu" />
+
+                    <Button Text="Afmelden"
+                            BackgroundColor="Transparent"
+                            TextColor="#FF4444"
+                            Clicked="OnLogoutClicked" />
+                </VerticalStackLayout>
+
+            </Frame>
+
         </Grid>
 
-
-        <!-- WHAT: Photo section heading
-             HOW: Bold label indicating photo requirement
-             WHY: Clear section title for user guidance -->
-        <Label 
-            Text="Foto"
-            FontSize="24"
-            FontAttributes="Bold"
-            TextColor="#00FF41"
-            HorizontalOptions="Center" />
-
-        <!-- WHAT: Photo placeholder/display area
-             HOW: Frame with Border containing Image + fallback label
-             WHY: Visually designated area for vehicle photo with clear boundaries -->
-        <Border Padding="10" 
-                BackgroundColor="#020A02" 
-                Stroke="#00FF41" 
-                StrokeThickness="2"
-                StrokeShape="RoundRectangle 12"
-                HeightRequest="280"
-                HorizontalOptions="FillAndExpand">
-            <Grid>
-                <!-- Image control for displaying captured photo -->
-                <Image 
-                    x:Name="VehiclePhotoImage"
-                    Source="{Binding VehiclePhoto}"
-                    Aspect="AspectFill"
-                    HorizontalOptions="FillAndExpand"
-                    VerticalOptions="FillAndExpand" />
-
-                <!-- Fallback label when no photo is taken -->
-                <Label 
-                    x:Name="NoPhotoLabel"
-                    Text="📷"
-                    FontSize="72"
-                    TextColor="#00FF41"
-                    HorizontalOptions="Center"
-                    VerticalOptions="Center"
-                    IsVisible="{Binding IsNoPhotoVisible}" />
-            </Grid>
-        </Border>
-
-        <!-- WHAT: Instruction label for photo requirement
-             HOW: Clear, descriptive text below photo area
-             WHY: Instructs user on what photo is needed and why -->
-        <Label 
-            Text="Maak een foto van het voertuig op de juiste parkeerplek."
-            TextColor="#00FF41"
-            FontSize="14"
-            HorizontalOptions="Center"
-            HorizontalTextAlignment="Center"
-            LineBreakMode="WordWrap"
-            Margin="10" />
-
-        <!-- WHAT: Spacer to push button to bottom
-             HOW: VerticalOptions.FillAndExpand on this BoxView
-             WHY: Ensures button placement at bottom of screen -->
-        <BoxView VerticalOptions="FillAndExpand" />
-
-        <!-- WHAT: Take photo button - primary action
-             HOW: Command binding to TakePhotoCommand in ViewModel
-             WHY: Initiates camera/media picker for photo capture -->
-        <Button 
-            Text="📷 Foto maken"
-            HeightRequest="55"
-            BackgroundColor="#020A02"
-            BorderColor="#00FF41"
-            BorderWidth="2"
-            TextColor="#00FF41"
-            CornerRadius="12"
-            FontSize="16"
-            FontAttributes="Bold"
-            Command="{Binding TakePhotoCommand}"
-            Margin="0,10" />
-
-        <!-- WHAT: End service button - secondary action
-             HOW: Command binding to FinishShiftCommand, disabled until photo taken
-             WHY: Completes workflow only when photo has been captured successfully -->
-        <Button
-    Text="Eind dienst"
-    HeightRequest="60"
-    BackgroundColor="#020A02"
-    BorderColor="#00FF41"
-    BorderWidth="2"
-    TextColor="#00FF41"
-    CornerRadius="12"
-    FontSize="18"
-    FontAttributes="Bold"
-    IsEnabled="{Binding CanFinishRoute}"
-    Command="{Binding FinishShiftCommand}" />
-
-    </VerticalStackLayout>
+    </Grid>
 
 </ContentPage>

@@ -28,5 +28,11 @@
 	</array>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/appicon.appiconset</string>
+
+	<!-- Camera and Photo Library usage descriptions required for runtime access on iOS -->
+	<key>NSCameraUsageDescription</key>
+	<string>De app heeft toegang tot de camera nodig om een foto van het voertuig te maken.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>De app slaat de gemaakte foto op om de dienstbeëindiging te registreren.</string>
 </dict>
 </plist>

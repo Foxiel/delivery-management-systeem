@@ -1,11 +1,17 @@
-using Android.OS;
+
 
 namespace delivery_management_systeem.Pages;
 
+using System;
+using System.IO;
+using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
+using Microsoft.Maui.ApplicationModel;
+using Microsoft.Maui.Storage;
+using Microsoft.Maui.Media;
 
 /// <summary>
 /// WHAT: Code-behind for DienstBeëindingenFoto page (final service completion screen)
@@ -18,6 +24,14 @@ public partial class DienstBeëindingenFoto : ContentPage
     // HOW: Instantiated in constructor and set as BindingContext
     // WHY: Enables XAML binding to photo capture commands and vehicle photo property
     private DienstBeëindingenFotoViewModel _viewModel;
+
+    // Menu overlay fields copied from DienstBeëindigen to make menu identical
+    private Grid _menuOverlay;
+    private Frame _menuPanel;
+    private Button _pauseButton;
+
+    private bool _isPaused;
+    private const double _menuWidth = 280;
 
     public DienstBeëindingenFoto()
     {
@@ -37,9 +51,79 @@ public partial class DienstBeëindingenFoto : ContentPage
     /// </summary>
     private async void OnMenuClicked(object sender, EventArgs e)
     {
-        // TODO: Implement navigation to menu/drawer based on your Shell/NavigationPage setup
-        // Example: await Shell.Current.GoToAsync("menu");
-        // Or: await Navigation.PopToRootAsync();
+        if (_menuOverlay == null || _menuPanel == null)
+            return;
+
+        if (!_menuOverlay.IsVisible)
+        {
+            _menuOverlay.IsVisible = true;
+            await _menuPanel.TranslateTo(0, 0, 250, Easing.SinOut);
+        }
+        else
+        {
+            await CloseMenu();
+        }
+    }
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+
+        _menuOverlay = this.FindByName<Grid>("MenuOverlay");
+        _menuPanel = this.FindByName<Frame>("MenuPanel");
+        _pauseButton = this.FindByName<Button>("PauzeButton");
+
+        if (_menuOverlay != null)
+            _menuOverlay.IsVisible = false;
+
+        if (_menuPanel != null)
+            _menuPanel.TranslationX = -_menuWidth;
+    }
+
+    private async Task CloseMenu()
+    {
+        if (_menuPanel != null)
+            await _menuPanel.TranslateTo(-_menuWidth, 0, 200, Easing.SinIn);
+
+        if (_menuOverlay != null)
+            _menuOverlay.IsVisible = false;
+    }
+
+    private async void OnOverlayTapped(object sender, EventArgs e)
+    {
+        await CloseMenu();
+    }
+
+    private async void OnHelpClickedFromMenu(object sender, EventArgs e)
+    {
+        await CloseMenu();
+        await Navigation.PushAsync(new HelpPage());
+    }
+
+    private async void OnPauseClickedFromMenu(object sender, EventArgs e)
+    {
+        _isPaused = !_isPaused;
+
+        if (_pauseButton != null)
+            _pauseButton.Text = _isPaused ? "Hervatten" : "Pauze";
+
+        await CloseMenu();
+
+        await DisplayAlertAsync("Pauze",
+            _isPaused ? "Pauze gestart" : "Pauze gestopt",
+            "OK");
+    }
+
+    private async void OnSettingsClickedFromMenu(object sender, EventArgs e)
+    {
+        await CloseMenu();
+        await Navigation.PushAsync(new SettingsPage());
+    }
+
+    private async void OnLogoutClicked(object sender, EventArgs e)
+    {
+        await CloseMenu();
+        await DisplayAlertAsync("Dienst stoppen", $"Je kunt niet meer terug ;)\n je moet nu je dienst beëindigen", "OK");
     }
 }
 
@@ -145,16 +229,35 @@ public class DienstBeëindingenFotoViewModel : INotifyPropertyChanged
             }
 
             // WHAT: Capture photo from camera
-            // HOW: Use MediaPicker.Default.CapturePhotoAsync() to open camera interface
-            // WHY: Provides native camera UI for photo capture
-            FileResult photo = await MediaPicker.Default.CapturePhotoAsync();
+            // HOW: Try using the native camera; if not available, fall back to picking from gallery
+            // WHY: Ensures functionality on devices/emulators without a camera implementation
+            FileResult photo = null;
+            try
+            {
+                photo = await MediaPicker.Default.CapturePhotoAsync(new MediaPickerOptions { Title = "Foto voertuig" });
+            }
+            catch (Exception)
+            {
+                // fallback: allow user to pick an existing photo if capture not supported
+                try
+                {
+                    photo = await MediaPicker.Default.PickPhotoAsync();
+                }
+                catch (Exception pickEx)
+                {
+                    await Application.Current.MainPage.DisplayAlert("Fout", $"Kan geen foto maken of selecteren: {pickEx.Message}", "OK");
+                    return;
+                }
+            }
 
             if (photo != null)
             {
                 // WHAT: Convert captured file to ImageSource
                 // HOW: Read file stream and create ImageSource for Image control
                 // WHY: Enables displaying captured photo in UI
-                string targetFile = Path.Combine(FileSystem.CacheDirectory, "vehicle_photo.jpg");
+                // Save to AppData so the photo persists on device between sessions
+                string targetFile = Path.Combine(FileSystem.AppDataDirectory, "vehicle_photo.jpg");
+
 
                 using (Stream sourceStream = await photo.OpenReadAsync())
                 {
@@ -164,10 +267,8 @@ public class DienstBeëindingenFotoViewModel : INotifyPropertyChanged
                     }
                 }
 
-                // WHAT: Update UI with captured photo
-                // HOW: Set VehiclePhoto to newly captured image file
-                // WHY: Displays photo to user for verification before service completion
-                VehiclePhoto = ImageSource.FromFile(targetFile);
+                // WHAT: Update UI with captured photo; load from file stream to avoid locking issues
+                VehiclePhoto = ImageSource.FromStream(() => File.OpenRead(targetFile));
 
                 await Application.Current.MainPage.DisplayAlert(
                     "Succes",
