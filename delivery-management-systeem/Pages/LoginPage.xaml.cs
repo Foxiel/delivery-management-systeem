@@ -43,7 +43,7 @@ public partial class LoginPage : ContentPage
 
             if (result.Status == BiometricResponseStatus.Success)
             {
-                await Navigation.PushAsync(new ScaningPage());
+                await Navigation.PushAsync(new Ingelogd());
             }
             else
             {
