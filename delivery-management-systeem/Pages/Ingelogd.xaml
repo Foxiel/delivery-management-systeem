@@ -75,6 +75,8 @@
             </VerticalStackLayout>
 
             <BoxView HeightRequest="20" Color="Transparent" />
+            
+            <Label Text="Het kan even duren voordat de volgende pagina is geladen" />
 
             <Button Text="DOORGAAN"
                     BackgroundColor="#00FF41"
