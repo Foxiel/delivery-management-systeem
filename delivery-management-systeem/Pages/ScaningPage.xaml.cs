@@ -52,10 +52,6 @@ public partial class ScaningPage : ContentPage
                         packetjesCollectionView.ItemsSource = null;
                         packetjesCollectionView.ItemsSource = Bezorgingen;
 
-                        await DisplayAlertAsync(
-                            "packetje gevonden",
-                            $"packetje: {bezorging.Code}",
-                            "OK");
 
                         return;
                     }
@@ -82,12 +78,6 @@ public partial class ScaningPage : ContentPage
 
                 packetjesCollectionView.ItemsSource = null;
                 packetjesCollectionView.ItemsSource = Bezorgingen;
-
-
-                await DisplayAlertAsync(
-                    "packetje gevonden",
-                    $"packetje: {bezorging.Code}",
-                    "OK");
 
                 return;
             }
@@ -117,11 +107,6 @@ public partial class ScaningPage : ContentPage
             {
                 bezorging.MistNaControle = true;
                 allesGescand = false;
-
-                await DisplayAlertAsync(
-                    "bezorging niet gescand",
-                    $"bezorging: {bezorging.Code}\nEAN: {bezorging.Code} is nog niet gescand.",
-                    "OK");
             }
         }
 

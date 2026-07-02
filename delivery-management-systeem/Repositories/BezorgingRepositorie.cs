@@ -16,8 +16,9 @@ namespace delivery_management_systeem.Repositories
 
             using var connection = GetConnection();
 
+            //top 3 is voor simplicity en gemakelijkhijd voor te testen 
             string sql = @"
-                SELECT
+                SELECT TOP 3 
                     b.track_trace_code
                 FROM Bezorging b";
 
