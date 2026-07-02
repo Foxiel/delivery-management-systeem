@@ -148,8 +148,6 @@ public partial class RetourPage : ContentPage
     private async void OnLogoutClicked(object sender, EventArgs e)
     {
         await CloseMenu();
-
-        Application.Current.MainPage =
-            new NavigationPage(new DienstBeëindigen());
+        await Navigation.PushAsync(new DienstBeëindigen());
     }
 }
