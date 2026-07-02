@@ -189,7 +189,7 @@ public partial class MapDeliveryPage : ContentPage
     {
         await CloseMenu();
 
-        Application.Current.MainPage =
-            new NavigationPage(new DienstBeëindigen());
+        await CloseMenu();
+        await Navigation.PushAsync(new DienstBeëindigen());
     }
 }
