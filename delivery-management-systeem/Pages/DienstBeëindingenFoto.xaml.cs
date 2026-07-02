@@ -236,8 +236,9 @@ public class DienstBeëindingenFotoViewModel : INotifyPropertyChanged
             {
                 photo = await MediaPicker.Default.CapturePhotoAsync(new MediaPickerOptions { Title = "Foto voertuig" });
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                await Application.Current.MainPage.DisplayAlert("Fout", $"Kan geen foto maken: {ex.Message}", "OK");
                 // fallback: allow user to pick an existing photo if capture not supported
                 try
                 {
@@ -269,11 +270,6 @@ public class DienstBeëindingenFotoViewModel : INotifyPropertyChanged
 
                 // WHAT: Update UI with captured photo; load from file stream to avoid locking issues
                 VehiclePhoto = ImageSource.FromStream(() => File.OpenRead(targetFile));
-
-                await Application.Current.MainPage.DisplayAlert(
-                    "Succes",
-                    "Foto succesvol opgenomen.",
-                    "OK");
             }
         }
         catch (Exception ex)
